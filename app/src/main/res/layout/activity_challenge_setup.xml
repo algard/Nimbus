@@ -13,4 +13,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:text="+"
+        android:textSize="40sp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/ripple"
+        android:id="@+id/fabbutton"
+        android:elevation="3dp"
+        android:fontFamily="sans-serif-light"
+        android:layout_gravity="right|bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>
