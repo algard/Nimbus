@@ -12,6 +12,24 @@
         android:id="@+id/authorizeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Authorize Jawbone"/>
+        android:layout_centerHorizontal="true"
+        android:text="Connect To Jawbone"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_below="@+id/authorizeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="My Challenges"/>
+
+    <ListView
+        android:id="@+id/challenge_list"
+        android:layout_below="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </ListView>
 
 </RelativeLayout>

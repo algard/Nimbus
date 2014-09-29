@@ -20,6 +20,8 @@ import com.jawbone.upplatformsdk.utils.UpPlatformSdkConstants;
 
 import java.util.ArrayList;
 
+import planetexpress.nimbus.Challenge;
+import planetexpress.nimbus.MindbodyRepository;
 import planetexpress.nimbus.R;
 
 
@@ -37,9 +39,12 @@ public class ClientChallengeActivity extends Activity {
 
     private ArrayList<UpPlatformSdkConstants.UpPlatformAuthScope> authScope;
 
+    private String mClientID = "david";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActionBar().setTitle("My Fitness Challenges");
         setContentView(R.layout.activity_client_challenge);
 
         // Set required levels of permissions here, for demonstration purpose
@@ -55,6 +60,13 @@ public class ClientChallengeActivity extends Activity {
                 startActivityForResult(intent, UpPlatformSdkConstants.JAWBONE_AUTHORIZE_REQUEST_CODE);
             }
         });
+    }
+
+    private void setupChallengeList(){
+        ArrayList<Challenge> userChallenges = MindbodyRepository.getChallengesForUser(mClientID);
+
+        
+
     }
 
     @Override
