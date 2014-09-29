@@ -6,8 +6,11 @@
         <item name="android:colorAccent">@color/orange05</item>
     </style>
 
-    <style name="DialogStyle" parent="@android:style/Theme.Holo.Light.Dialog">
+    <style name="DialogStyle" parent="@android:style/Theme.Material.Light">
         <item name="android:buttonStyle">@style/ButtonStyle</item>
+        <item name="android:colorPrimary">@color/orange04</item>
+        <item name="android:colorPrimaryDark">@color/orange01</item>
+        <item name="android:colorAccent">@color/orange05</item>
     </style>
 
     <style name="ButtonStyle" parent="@android:style/Widget.Button">
