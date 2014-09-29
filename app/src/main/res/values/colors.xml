@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <!-- Connect-Colors -->
     <color name="soft_green">#92CD8B</color>
     <color name="soft_red">#f89169</color>
