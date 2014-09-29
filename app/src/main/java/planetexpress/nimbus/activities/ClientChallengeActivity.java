@@ -105,7 +105,7 @@ public class ClientChallengeActivity extends Activity {
     private Intent getIntentForWebView() {
         Uri.Builder builder = OauthUtils.setOauthParameters(JAWBONE_CLIENT_ID, OAUTH_CALLBACK_URL, authScope);
 
-        Intent intent = new Intent(OauthWebViewActivity.class.getName());
+        Intent intent = new Intent(this, OauthWebViewActivity.class);
         intent.putExtra(UpPlatformSdkConstants.AUTH_URI, builder.build());
         return intent;
     }

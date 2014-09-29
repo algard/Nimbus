@@ -3,6 +3,9 @@
     package="com.jawbone.upplatformsdk" >
 
     <application>
+        <activity
+            android:name="com.jawbone.upplatformsdk.oauth.OauthWebViewActivity" >
+        </activity>
     </application>
 
 </manifest>
