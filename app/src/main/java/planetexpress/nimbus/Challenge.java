@@ -10,11 +10,13 @@ public class Challenge {
     public static final String PARSE_ID = "objectId";
     public static final String PARSE_CLASS = "Challenge";
     public static final String PARSE_TIME = "endTime";
+    public static final String PARSE_DESCRIPTION = "Description";
 
     private String mId;
     private String mName;
     private ArrayList<Client> mParticipants;
     private String endTime;
+    private String description;
 
     public String getId() {
         return mId;
@@ -52,6 +54,7 @@ public class Challenge {
         Challenge challenge = new Challenge();
         challenge.setName(parseChallenge.getString(Challenge.PARSE_NAME));
         challenge.setId(parseChallenge.getString(Challenge.PARSE_ID));
+        challenge.setDescription(parseChallenge.getString(Challenge.PARSE_DESCRIPTION));
         challenge.setEndTime("9/30 9:00AM");
         return challenge;
     }
@@ -62,5 +65,13 @@ public class Challenge {
             result.add(Challenge.fromParseObject(challenge));
         }
         return result;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
