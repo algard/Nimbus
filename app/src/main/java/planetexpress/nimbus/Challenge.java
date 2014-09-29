@@ -3,8 +3,32 @@ package planetexpress.nimbus;
 import java.util.ArrayList;
 
 public class Challenge {
-    public int mId;
-    public int mName;
-    public ArrayList<Client> mParticipants;
+    private int mId;
+    private int mName;
+    private ArrayList<Client> mParticipants;
+
+    public int getId() {
+        return mId;
+    }
+
+    public void setId(int mId) {
+        this.mId = mId;
+    }
+
+    public int getName() {
+        return mName;
+    }
+
+    public void setName(int mName) {
+        this.mName = mName;
+    }
+
+    public ArrayList<Client> getParticipants() {
+        return mParticipants;
+    }
+
+    public void setParticipants(ArrayList<Client> mParticipants) {
+        this.mParticipants = mParticipants;
+    }
 
 }

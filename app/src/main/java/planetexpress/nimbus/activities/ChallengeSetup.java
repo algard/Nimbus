@@ -1,9 +1,13 @@
 package planetexpress.nimbus.activities;
 
 import android.app.Activity;
+import android.graphics.Outline;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,6 +22,23 @@ public class ChallengeSetup extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_setup);
+
+        Button fab = (Button) findViewById(R.id.fabbutton);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                Toast.makeText(getApplicationContext(), "Fab button pressed", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        /* Sets up the fab button outlines and shape */
+        Outline mOutlineCircle;
+        int shapeSize = getResources().getDimensionPixelSize(R.dimen.fab_button_size);
+        mOutlineCircle = new Outline();
+        mOutlineCircle.setRoundRect(0, 0, shapeSize, shapeSize, shapeSize / 2);
+
+        fab.setOutline(mOutlineCircle);
+        fab.setClipToOutline(true);
 
         getChallenges();
     }

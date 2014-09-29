@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 import planetexpress.nimbus.R;
 
-
+import planetexpress.nimbus.fragments.ChallengeListFragment;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -37,9 +37,13 @@ public class ClientChallengeActivity extends Activity {
 
     private ArrayList<UpPlatformSdkConstants.UpPlatformAuthScope> authScope;
 
+    //TODO get this value from the user
+    private String mClientID = "david";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActionBar().setTitle(getString(R.string.client_mode_title));
         setContentView(R.layout.activity_client_challenge);
 
         // Set required levels of permissions here, for demonstration purpose
@@ -55,8 +59,10 @@ public class ClientChallengeActivity extends Activity {
                 startActivityForResult(intent, UpPlatformSdkConstants.JAWBONE_AUTHORIZE_REQUEST_CODE);
             }
         });
-    }
 
+        //TODO setup clientID / jawbone interaction first, as a sort of FTU-style popup?
+        getFragmentManager().beginTransaction().add(ChallengeListFragment.newInstance(mClientID), "fragTag").commit();
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == UpPlatformSdkConstants.JAWBONE_AUTHORIZE_REQUEST_CODE && resultCode == RESULT_OK) {

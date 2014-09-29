@@ -44,4 +44,9 @@ public class MindbodyRepository {
         });
         return new ArrayList<>();
     }
+
+    public ArrayList<Challenge> getChallengesForUser(String mClientID) {
+
+        return new ArrayList<>();
+    }
 }
