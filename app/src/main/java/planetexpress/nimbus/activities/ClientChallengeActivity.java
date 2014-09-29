@@ -37,6 +37,9 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
 
     private ArrayList<UpPlatformSdkConstants.UpPlatformAuthScope> authScope;
 
+    private String accessToken;
+    private String refreshToken;
+
     //TODO get this value from the user
     private String mClientID = "david";
     private ChallengeListFragment mFragment;
@@ -64,6 +67,16 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
         //TODO setup clientID / jawbone interaction first, as a sort of FTU-style popup?
         mFragment = ChallengeListFragment.newInstance(mClientID);
         getFragmentManager().beginTransaction().add(mFragment, "fragTag").commit();
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ClientChallengeActivity.this);
+        accessToken = preferences.getString(UpPlatformSdkConstants.UP_PLATFORM_ACCESS_TOKEN, "");
+        refreshToken = preferences.getString(UpPlatformSdkConstants.UP_PLATFORM_REFRESH_TOKEN, "");
+
+        if (accessToken.isEmpty()) {
+            //TODO: David hide list
+        } else {
+            oAuthAuthorizeButton.setVisibility(View.GONE);
+        }
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
