@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
@@ -21,6 +22,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import butterknife.OnClick;
 import planetexpress.nimbus.Challenge;
 import planetexpress.nimbus.MindbodyRepository;
 import planetexpress.nimbus.R;
@@ -34,16 +36,33 @@ public class ChallengeSetup extends Activity {
     private static final String TAG = "ChallengeSetupActivity";
 
     @InjectView(R.id.fabbutton) protected Button fabButton;
+    @InjectView(R.id.ongoing_view_selector) protected TextView ongoingTab;
+    @InjectView(R.id.addnew_view_selector) protected TextView addNewTab;
+
+    @OnClick(R.id.ongoing_view_selector)
+    public void selectOngoing() {
+        ongoingTab.setActivated(true);
+        addNewTab.setActivated(false);
+        fabButton.setVisibility(View.VISIBLE);
+    }
+
+    @OnClick(R.id.addnew_view_selector)
+    public void selectAddNew() {
+        ongoingTab.setActivated(false);
+        addNewTab.setActivated(true);
+        onAddButtonPressed();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_setup);
         ButterKnife.inject(this);
         ParseAnalytics.trackAppOpened(getIntent());
-
+        ongoingTab.setActivated(true);
+        addNewTab.setActivated(false);
         fabButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                    onAddButtonPressed(v);
+                    onAddButtonPressed();
             }
         });
 
@@ -59,7 +78,8 @@ public class ChallengeSetup extends Activity {
         getChallenges();
     }
 
-    private void onAddButtonPressed(View v) {
+    private void onAddButtonPressed() {
+        fabButton.setVisibility(View.GONE);
         Fragment detailsFragment = new ChallengeDetailsFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, detailsFragment);
