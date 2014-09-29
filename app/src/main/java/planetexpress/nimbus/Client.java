@@ -11,7 +11,7 @@ import java.util.List;
 public class Client {
     public static final String PARSE_CLASS = "Client";
     public static final String PARSE_NAME = "name";
-    public static final String PARSE_ID = "name";
+    public static final String PARSE_ID = "id";
     public String mId;
     public String mName;
 

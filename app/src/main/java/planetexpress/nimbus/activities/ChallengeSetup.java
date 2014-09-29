@@ -4,10 +4,20 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Outline;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import com.parse.Parse;
+import com.parse.ParseAnalytics;
+import com.parse.ParseException;
+import com.parse.ParsePush;
+import com.parse.SendCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -21,16 +31,39 @@ import butterknife.InjectView;
 
 public class ChallengeSetup extends Activity {
 
+    private static final String TAG = "ChallengeSetupActivity";
+
     @InjectView(R.id.fabbutton) protected Button fabButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_setup);
         ButterKnife.inject(this);
+        ParseAnalytics.trackAppOpened(getIntent());
 
         fabButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                onAddButtonPressed(v);
+                ParsePush push = new ParsePush();
+//
+                JSONObject data = null;
+                try {
+                    data = new JSONObject("{\"action\": \"planetexpress.nimbus.UPDATE_STATUS\", \"name\": \"Test!!\" }");
+
+                    push.setChannel("Test");
+                    push.setData(data);
+                    push.setMessage("Testing the test");
+                    push.sendInBackground(new SendCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            Log.d(TAG, "Message Done Sending -- Challenge Created");
+
+                        }
+                    });
+                    onAddButtonPressed(v);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 

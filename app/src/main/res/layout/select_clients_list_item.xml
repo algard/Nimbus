@@ -16,7 +16,7 @@
         android:checked="true"/>
 
     <TextView
-        android:id="@+id/staffNameLabel"
+        android:id="@+id/clientNameLabel"
         android:fontFamily="sans-serif"
         android:textColor="#7D7D7D"
         android:text="Client Name"

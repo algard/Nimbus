@@ -12,7 +12,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -25,13 +24,6 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 import planetexpress.nimbus.Client;
 import planetexpress.nimbus.R;
 import planetexpress.nimbus.WireTaskCallback;
@@ -43,20 +35,19 @@ public class SelectClientsDialog extends DialogFragment {
     //ClientRepository clientRepo;
     //Visit visit;
     private ArrayList<Client> clients;
-    private int choiceMode;
     private WireTaskCallback<ArrayList<Client>> onSuccessCallback;
     private Runnable dialogCancelledCallback;
     ArrayAdapter<Client> adapter;
-    @InjectView(R.id.allStaffCheckbox)
-    CheckBox allStaffCheckbox;
+    @InjectView(R.id.allClientsCheckbox)
+    CheckBox allClientsCheckbox;
     @InjectView(R.id.saveButton)
     Button submitButton;
     @InjectView(R.id.cancelButton) Button cancelButton;
-    @InjectView(R.id.staffListView)
-    ListView staffList;
+    @InjectView(R.id.clientListView)
+    ListView clientList;
     @InjectView(R.id.xButton) Button xButton;
-    @InjectView(R.id.allStaffLabel)
-    TextView allStaffLabel;
+    @InjectView(R.id.allClientsLabel)
+    TextView allClientsLabel;
     @InjectView(R.id.topDiv)
     View topDivider;
 
@@ -92,20 +83,20 @@ public class SelectClientsDialog extends DialogFragment {
                     LayoutInflater li = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     newView = li.inflate(R.layout.select_clients_list_item, null);
                 }
-                ((TextView)newView.findViewById(R.id.staffNameLabel)).setText(getItem(position).getName());
+                ((TextView)newView.findViewById(R.id.clientNameLabel)).setText(getItem(position).getName());
 
                 newView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         //toggle, if it is checked uncheck it
                         if(((CheckedRelativeLayout)v).isChecked()) {
-                            staffList.setItemChecked((Integer) v.getTag(), false);
-                            allStaffCheckbox.setChecked(false);
+                            clientList.setItemChecked((Integer) v.getTag(), false);
+                            allClientsCheckbox.setChecked(false);
                         }
                         else{
-                            staffList.setItemChecked((Integer) v.getTag(), true);
-                            if(staffList.getCheckedItemCount() == adapter.getCount()) {
-                                allStaffCheckbox.setChecked(true);
+                            clientList.setItemChecked((Integer) v.getTag(), true);
+                            if(clientList.getCheckedItemCount() == adapter.getCount()) {
+                                allClientsCheckbox.setChecked(true);
                             }
                         }
                     }});
@@ -114,32 +105,32 @@ public class SelectClientsDialog extends DialogFragment {
                 return newView;
             }
         };
-        staffList.setAdapter(adapter);
-        staffList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        clientList.setAdapter(adapter);
+        clientList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
         //initialize all to checked!
-        allStaffCheckbox.setChecked(true);
+        allClientsCheckbox.setChecked(true);
         for (int i = 0; i < adapter.getCount(); i++) {
-            staffList.setItemChecked(i, true);
+            clientList.setItemChecked(i, true);
         }
 
 
-        allStaffCheckbox.setOnClickListener(new View.OnClickListener(){
+        allClientsCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //note that the checking action happens before onclick so the isChecked is valid for the state it will be
-                if(((CheckBox)v).isChecked()) {
-                    for(int i = 0; i < adapter.getCount(); i ++ ) {
-                        staffList.setItemChecked(i, true);
+                if (((CheckBox) v).isChecked()) {
+                    for (int i = 0; i < adapter.getCount(); i++) {
+                        clientList.setItemChecked(i, true);
                     }
-                }
-                else {
-                    for(int i = 0; i < adapter.getCount(); i ++ ) {
-                        staffList.setItemChecked(i, false);
+                } else {
+                    for (int i = 0; i < adapter.getCount(); i++) {
+                        clientList.setItemChecked(i, false);
                     }
                 }
 
-            }});
+            }
+        });
 
         submitButton.setOnClickListener(new View.OnClickListener() {
 
@@ -176,18 +167,17 @@ public class SelectClientsDialog extends DialogFragment {
             }
         });
 
-        allStaffLabel.setOnClickListener(new View.OnClickListener() {
+        allClientsLabel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                allStaffCheckbox.toggle();
-                if (allStaffCheckbox.isChecked()) {
-                    for(int i = 0; i < adapter.getCount(); i++ ) {
-                        staffList.setItemChecked(i, true);
+                allClientsCheckbox.toggle();
+                if (allClientsCheckbox.isChecked()) {
+                    for (int i = 0; i < adapter.getCount(); i++) {
+                        clientList.setItemChecked(i, true);
                     }
-                }
-                else {
-                    for(int i=0; i < adapter.getCount(); i++) {
-                        staffList.setItemChecked(i, false);
+                } else {
+                    for (int i = 0; i < adapter.getCount(); i++) {
+                        clientList.setItemChecked(i, false);
                     }
                 }
             }
@@ -198,7 +188,7 @@ public class SelectClientsDialog extends DialogFragment {
 
     private ArrayList<Client> getSelectedItems() {
         ArrayList<Client> retVal = new ArrayList<Client>();
-        SparseBooleanArray checkedPositions = staffList.getCheckedItemPositions();
+        SparseBooleanArray checkedPositions = clientList.getCheckedItemPositions();
         for(int i=0; i < adapter.getCount(); i++) {
             if(checkedPositions.get(i, false)) {
                 retVal.add(adapter.getItem(i));

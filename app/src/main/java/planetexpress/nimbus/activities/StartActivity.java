@@ -31,6 +31,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
 import com.jawbone.upplatformsdk.utils.UpPlatformSdkConstants;
+import com.parse.PushService;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Challenge {
-    public static final String PARSE_NAME = "name";
+    public static final String PARSE_NAME = "Name";
     public static final String PARSE_ID = "objectId";
     public static final String PARSE_CLASS = "Challenge";
     public static final String PARSE_TIME = "endTime";
@@ -44,10 +44,15 @@ public class Challenge {
         return endTime;
     }
 
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
     public static Challenge fromParseObject(ParseObject parseChallenge) {
         Challenge challenge = new Challenge();
         challenge.setName(parseChallenge.getString(Challenge.PARSE_NAME));
         challenge.setId(parseChallenge.getString(Challenge.PARSE_ID));
+        challenge.setEndTime("9/30 9:00AM");
         return challenge;
     }
 

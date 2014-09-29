@@ -56,11 +56,8 @@ public class ChallengeListFragment extends ListFragment {
         mClientID = null;
 
         mUserChallenges = new ArrayList<>();
-        Challenge fake = new Challenge();
-        fake.setName("Fake");
-        fake.setId("aosdasdasd");
-        mUserChallenges.add(fake);
-        mChallengeListAdapter = new ChallengeListAdapter(getActivity(), android.R.id.text1, mUserChallenges);
+        boolean isClientMode = mClientID == null;
+        mChallengeListAdapter = new ChallengeListAdapter(getActivity(), android.R.id.text1, mUserChallenges, isClientMode);
         setListAdapter(mChallengeListAdapter);
 
         getChallenges();
@@ -98,6 +95,7 @@ public class ChallengeListFragment extends ListFragment {
                 @Override
                 public void onData(ArrayList<Challenge> result) {
                     mUserChallenges.addAll(result);
+                    mChallengeListAdapter.notifyDataSetChanged();
                 }
 
                 @Override

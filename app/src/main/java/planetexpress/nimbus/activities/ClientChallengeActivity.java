@@ -17,6 +17,7 @@ import com.jawbone.upplatformsdk.api.response.OauthAccessTokenResponse;
 import com.jawbone.upplatformsdk.oauth.OauthUtils;
 import com.jawbone.upplatformsdk.oauth.OauthWebViewActivity;
 import com.jawbone.upplatformsdk.utils.UpPlatformSdkConstants;
+import com.parse.PushService;
 
 import java.util.ArrayList;
 
@@ -64,9 +65,11 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
             }
         });
 
+        PushService.subscribe(this, "NimbusChallengeChannel", ClientChallengeActivity.class);
+
         //TODO setup clientID / jawbone interaction first, as a sort of FTU-style popup?
         mFragment = ChallengeListFragment.newInstance(mClientID);
-        getFragmentManager().beginTransaction().add(mFragment, "fragTag").commit();
+        getFragmentManager().beginTransaction().replace(R.id.container, mFragment).commit();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ClientChallengeActivity.this);
         accessToken = preferences.getString(UpPlatformSdkConstants.UP_PLATFORM_ACCESS_TOKEN, "");
