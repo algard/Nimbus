@@ -30,9 +30,10 @@ import planetexpress.nimbus.R;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import planetexpress.nimbus.fragments.ChallengeDetailsFragment;
+import planetexpress.nimbus.fragments.ChallengeListFragment;
 
 
-public class ChallengeSetup extends Activity {
+public class ChallengeSetup extends Activity implements ChallengeListFragment.OnFragmentInteractionListener {
     private static final String TAG = "ChallengeSetupActivity";
 
     @InjectView(R.id.fabbutton) protected Button fabButton;
@@ -44,6 +45,8 @@ public class ChallengeSetup extends Activity {
         ongoingTab.setActivated(true);
         addNewTab.setActivated(false);
         fabButton.setVisibility(View.VISIBLE);
+
+        loadChallengeList();
     }
 
     @OnClick(R.id.addnew_view_selector)
@@ -75,6 +78,9 @@ public class ChallengeSetup extends Activity {
         fabButton.setOutline(mOutlineCircle);
         fabButton.setClipToOutline(true);
 
+        //start with ongoing tab loaded
+        selectOngoing();
+
         getChallenges();
     }
 
@@ -83,6 +89,14 @@ public class ChallengeSetup extends Activity {
         Fragment detailsFragment = new ChallengeDetailsFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, detailsFragment);
+        transaction.commit();
+    }
+
+    private void loadChallengeList(){
+        fabButton.setVisibility(View.VISIBLE);
+        Fragment listFragment = new ChallengeListFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, listFragment);
         transaction.commit();
     }
 
@@ -123,5 +137,10 @@ public class ChallengeSetup extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onChallengeSelected(String id) {
+        //TODO intent to ChallengeDetailsFragment ... etc
     }
 }
