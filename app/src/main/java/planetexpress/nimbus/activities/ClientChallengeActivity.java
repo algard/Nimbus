@@ -65,7 +65,7 @@ public class ClientChallengeActivity extends Activity {
     private void setupChallengeList(){
         ArrayList<Challenge> userChallenges = MindbodyRepository.getChallengesForUser(mClientID);
 
-        
+
 
     }
 
