@@ -44,6 +44,7 @@ public class ChallengeSetup extends Activity {
     public void selectOngoing() {
         ongoingTab.setActivated(true);
         addNewTab.setActivated(false);
+        fabButton.setVisibility(View.VISIBLE);
     }
 
     @OnClick(R.id.addnew_view_selector)
@@ -102,6 +103,7 @@ public class ChallengeSetup extends Activity {
     private void onAddButtonPressed() {
         ongoingTab.setActivated(false);
         addNewTab.setActivated(true);
+        fabButton.setVisibility(View.GONE);
         Fragment detailsFragment = new ChallengeDetailsFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, detailsFragment);
