@@ -6,8 +6,23 @@
     <color name="soft_blue">#8fc2da</color>
     <color name="soft_orange">#F7AF65</color>
     <color name="soft_white">#F0F0F0</color>
-
     <color name="background">#999ea1a7</color>
+
+    <!--Orange Color Swatch from Material Guidelines-->
+    <color name="orange01">#FF8A00</color>
+    <color name="orange02">#FF9105</color>
+    <color name="orange03">#FF9909</color>
+    <color name="orange04">#FFA00E</color>
+    <color name="orange05">#FFA713</color>
+    <color name="orange06">#FFAE18</color>
+    <color name="orange07">#FFB61C</color>
+    <color name="orange08">#FFBD21</color>
+    <color name="orange09">#FFC641</color>
+    <color name="orange10">#FFD060</color>
+    <color name="orange11">#FFD980</color>
+    <color name="orange12">#FFE3A0</color>
+    <color name="orange13">#FFECC0</color>
+    <color name="orange14">#FFF6DF</color>
 
 
 </resources>
