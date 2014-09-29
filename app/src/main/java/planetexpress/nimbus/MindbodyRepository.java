@@ -45,7 +45,14 @@ public class MindbodyRepository {
         return new ArrayList<>();
     }
 
+    //TODO get the list of challenges from Parse
     public ArrayList<Challenge> getChallengesForUser(String mClientID) {
+
+        return new ArrayList<>();
+    }
+
+    //TODO get the list of clients from Parse
+    public ArrayList<Client> getAllClients(){
 
         return new ArrayList<>();
     }
