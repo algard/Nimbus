@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Challenge {
-    public static final String PARSE_NAME = "name";
+    public static final String PARSE_NAME = "Name";
     public static final String PARSE_ID = "objectId";
     public static final String PARSE_CLASS = "Challenge";
     public static final String PARSE_TIME = "endTime";
