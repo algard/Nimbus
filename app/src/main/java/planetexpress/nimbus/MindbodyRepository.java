@@ -55,7 +55,7 @@ public class MindbodyRepository {
     }
 
     //TODO get the list of challenges from Parse
-    public ArrayList<Challenge> getChallengesForUser(String mClientID) {
+    public ArrayList<Challenge> getChallengesForUser(String mClientID, final ChallengeDataListener listener) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(Challenge.PARSE_CLASS);
         query.whereEqualTo("", "Dan Stemkoski");
         query.findInBackground(new FindCallback<ParseObject>() {

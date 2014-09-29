@@ -74,7 +74,31 @@ public class ChallengeListFragment extends ListFragment {
 
     private void getChallenges(){
         MindbodyRepository repo = new MindbodyRepository(getActivity());
-        mUserChallenges.addAll(repo.getChallengesForUser(mClientID));
+        if(mClientID != null) {
+            repo.getChallengesForUser(mClientID, new MindbodyRepository.ChallengeDataListener() {
+                @Override
+                public void onData(ArrayList<Challenge> result) {
+                    mUserChallenges.addAll(result);
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            });
+        }else{
+            repo.getAllChallenges(new MindbodyRepository.ChallengeDataListener() {
+                @Override
+                public void onData(ArrayList<Challenge> result) {
+                    mUserChallenges.addAll(result);
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            });
+        }
     }
 
 
