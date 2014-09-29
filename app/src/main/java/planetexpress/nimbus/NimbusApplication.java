@@ -14,6 +14,6 @@ public class NimbusApplication extends Application {
         Parse.initialize(this, "JY8JGpsHsVuI14Dm83pEltqT67ZpHF4azI3BWEfO", "lwSkZpBYCziAJWFNNw7xwuR4dJDzPvyxjSv9LOwS");
 
         //TODO change activity maybe?
-        PushService.subscribe(this, "NimbusChallengeChannel", StartActivity.class);
+        PushService.subscribe(this, "Test", StartActivity.class);
     }
 }

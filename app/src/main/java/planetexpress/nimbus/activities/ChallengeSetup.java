@@ -16,6 +16,9 @@ import com.parse.ParseException;
 import com.parse.ParsePush;
 import com.parse.SendCallback;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import planetexpress.nimbus.Challenge;
@@ -41,15 +44,26 @@ public class ChallengeSetup extends Activity {
         fabButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 ParsePush push = new ParsePush();
-                push.setChannel("NimbusChallengeChannel");
-                push.setMessage("Challenge Created");
-                push.sendInBackground(new SendCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        Log.d(TAG, "Message Done Sending -- Challenge Created");
-                    }
-                });
-                onAddButtonPressed(v);
+//
+                JSONObject data = null;
+                try {
+                    data = new JSONObject("{\"action\": \"planetexpress.nimbus.UPDATE_STATUS\", \"name\": \"Test!!\" }");
+
+                    push.setChannel("Test");
+                    push.setData(data);
+                    push.setMessage("Testing the test");
+                    push.sendInBackground(new SendCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            Log.d(TAG, "Message Done Sending -- Challenge Created");
+
+                        }
+                    });
+                    onAddButtonPressed(v);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 

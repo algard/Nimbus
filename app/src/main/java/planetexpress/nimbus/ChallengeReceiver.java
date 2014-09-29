@@ -1,4 +1,4 @@
-package planetexpress.nimbus.activities;
+package planetexpress.nimbus;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

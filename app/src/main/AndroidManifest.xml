@@ -78,10 +78,10 @@
             android:value="@integer/google_play_services_version" />
 
         <receiver
-            android:name=".activities.ChallengeReceiver"
+            android:name=".ChallengeReceiver"
             android:exported="false" >
             <intent-filter>
-                <action android:name="com.example.UPDATE_STATUS" />
+                <action android:name="planetexpress.nimbus.UPDATE_STATUS" />
             </intent-filter>
         </receiver>
     </application>
