@@ -7,13 +7,24 @@ import android.view.MenuItem;
 import planetexpress.nimbus.R;
 
 public class ClientModeChallengeDetailsActivity extends Activity {
+    public static final String EXTRA_CHALLENGE_ID = "challenge_id";
+
+    private String mChallengeName = "500 Steps Challenge";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(getIntent() != null){
+            mChallengeName = getIntent().getStringExtra(EXTRA_CHALLENGE_ID);
+        }
+        if(mChallengeName == null){
+            mChallengeName = "Steps Challenge!";
+        }
+
+        getActionBar().setTitle(mChallengeName);
         setContentView(R.layout.activity_client_mode_challenge_details);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
