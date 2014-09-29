@@ -66,7 +66,8 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
             }
         });
 
-        PushService.subscribe(this, "NimbusChallengeChannel", ClientChallengeActivity.class);
+        //PushService.subscribe(this, "NimbusChallengeChannel", ClientChallengeActivity.class);
+        PushService.subscribe(this, "ChallengeCreated", ClientChallengeActivity.class);
 
         //TODO setup clientID / jawbone interaction first, as a sort of FTU-style popup?
         mFragment = ChallengeListFragment.newInstance(mClientID);
