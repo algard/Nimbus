@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -22,7 +21,7 @@ public class ChallengeListAdapter extends ArrayAdapter<Challenge> {
         super(context, resource, dataSet);
         this.mItems = dataSet;
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.mIsClientMode = true;
+        this.mIsClientMode = isClientMode;
     }
 
 
@@ -40,6 +39,10 @@ public class ChallengeListAdapter extends ArrayAdapter<Challenge> {
         if(mIsClientMode){
             (convertView.findViewById(R.id.roster_button)).setVisibility(View.GONE);
             (convertView.findViewById(R.id.edit_button)).setVisibility(View.GONE);
+
+            (convertView.findViewById(R.id.roster_button)).setVisibility(View.GONE);
+            (convertView.findViewById(R.id.edit_button)).setVisibility(View.GONE);
+
         }
 
         challengeName.setText(challenge.getName());

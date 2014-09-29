@@ -7,5 +7,6 @@
     <string name="title_activity_my">MyActivity</string>
     <string name="title_activity_client_challenge">ClientChallengeActivity</string>
     <string name="client_mode_title">My Fitness Challenges</string>
+    <string name="title_activity_client_mode_challenge_details">ClientModeChallengeDetailsActivity</string>
 
 </resources>

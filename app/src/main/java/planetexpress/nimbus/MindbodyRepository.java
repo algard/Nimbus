@@ -78,4 +78,8 @@ public class MindbodyRepository {
             }
         });
     }
+
+    public void getClientForID(){
+
+    }
 }
