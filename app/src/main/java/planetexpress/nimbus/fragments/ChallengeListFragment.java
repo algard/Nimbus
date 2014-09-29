@@ -51,8 +51,8 @@ public class ChallengeListFragment extends ListFragment {
         if (getArguments() != null) {
             mClientID = getArguments().getString(ARG_CLIENT_ID);
         }
-
         // TODO: Change Adapter to display your content
+        mUserChallenges = new ArrayList<>();
         mChallengeListAdapter = new ChallengeListAdapter(getActivity(), android.R.id.text1, mUserChallenges);
         setListAdapter(mChallengeListAdapter);
 
@@ -74,7 +74,7 @@ public class ChallengeListFragment extends ListFragment {
 
     private void getChallenges(){
         MindbodyRepository repo = new MindbodyRepository(getActivity());
-        mUserChallenges = repo.getChallengesForUser(mClientID);
+        mUserChallenges.addAll(repo.getChallengesForUser(mClientID));
     }
 
 
@@ -119,7 +119,7 @@ public class ChallengeListFragment extends ListFragment {
     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onChallengeSelected(int id);
+        public void onChallengeSelected(String id);
     }
 
 }

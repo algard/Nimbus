@@ -142,7 +142,7 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
     }
 
     @Override
-    public void onChallengeSelected(int id) {
+    public void onChallengeSelected(String id) {
         //TODO launch challenge details activity
     }
 }
