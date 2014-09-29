@@ -13,7 +13,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParsePush;
+import com.parse.SaveCallback;
 import com.parse.SendCallback;
 
 import org.json.JSONException;
@@ -59,25 +61,40 @@ public class ChallengeDetailsFragment extends Fragment {
         startChallenge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ParsePush push = new ParsePush();
-//
-                JSONObject data = null;
-                try {
-                    data = new JSONObject("{\"action\": \"planetexpress.nimbus.CREATE_CHALLENGE\", \"name\": \"Test!!\" }");
+                final ParseObject createChallenge = new ParseObject("Challenge");
+                createChallenge.put("Name", "Sean Plott");
+                createChallenge.put("Description", "This is just a test");
+                //Create new challenge
+                createChallenge.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        //Once challenge is done Push to all Clients
+                        ParsePush push = new ParsePush();
+                        JSONObject data = null;
+                        try {
+                            //Create challenge object here -- pass forward it's ID
+                            data = new JSONObject("{\"action\": \"planetexpress.nimbus.CREATE_CHALLENGE\"," +
+                                    " \"name\": \"" + createChallenge.get("Name")
+                                    +"\", \"objectId\": \"" + createChallenge.getObjectId() + "\" }");
 
-                    push.setChannel("ChallengeCreated");
-                    push.setData(data);
-                    push.setMessage("Testing the test");
-                    push.sendInBackground(new SendCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            Log.d(TAG, "Message Done Sending -- Challenge Created");
+                            push.setChannel("ChallengeCreated");
+                            push.setData(data);
+                            push.setMessage("You have been challenged, can you conquer today's \'"
+                                            + createChallenge.getString("Name") + "' challenge!?");
+                            push.sendInBackground(new SendCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    Log.d(TAG, "Challenge Created");
 
+                                }
+                            });
+                        } catch (JSONException ex) {
+                            ex.printStackTrace();
                         }
-                    });
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                    }
+                });
+
+
             }
         });
 
