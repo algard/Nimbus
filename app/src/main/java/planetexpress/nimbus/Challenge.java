@@ -6,6 +6,7 @@ public class Challenge {
     private int mId;
     private int mName;
     private ArrayList<Client> mParticipants;
+    private String endTime;
 
     public int getId() {
         return mId;
@@ -31,4 +32,7 @@ public class Challenge {
         this.mParticipants = mParticipants;
     }
 
+    public String getEndTime() {
+        return endTime;
+    }
 }

@@ -3,13 +3,17 @@ package planetexpress.nimbus.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.app.ListFragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import butterknife.ButterKnife;
 import planetexpress.nimbus.Challenge;
 import planetexpress.nimbus.MindbodyRepository;
+import planetexpress.nimbus.R;
 import planetexpress.nimbus.adapters.ChallengeListAdapter;
 
 /**
@@ -54,6 +58,19 @@ public class ChallengeListFragment extends ListFragment {
 
         getChallenges();
     }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+
+        View view = inflater.inflate(R.layout.challenge_list_fragment, null);
+
+        //HERE BE INJECTION!!!
+        ButterKnife.inject(this, view);
+
+        return view;
+    }
+
 
     private void getChallenges(){
         MindbodyRepository repo = new MindbodyRepository(getActivity());

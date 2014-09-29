@@ -5,7 +5,9 @@
     <color name="soft_red">#f89169</color>
     <color name="soft_blue">#8fc2da</color>
     <color name="soft_orange">#F7AF65</color>
-    <color name="soft_white">#CFCFCF</color>
+    <color name="soft_white">#F0F0F0</color>
+
+    <color name="background">#999ea1a7</color>
 
 
 </resources>
