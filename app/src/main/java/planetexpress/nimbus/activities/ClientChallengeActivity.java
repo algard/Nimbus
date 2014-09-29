@@ -63,8 +63,9 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
 
         //TODO setup clientID / jawbone interaction first, as a sort of FTU-style popup?
         mFragment = ChallengeListFragment.newInstance(mClientID);
-        getFragmentManager().beginTransaction().add(mFragment, "fragTag").commit();
+        getFragmentManager().beginTransaction().replace(R.id.container, mFragment).commit();
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == UpPlatformSdkConstants.JAWBONE_AUTHORIZE_REQUEST_CODE && resultCode == RESULT_OK) {
