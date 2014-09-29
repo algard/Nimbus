@@ -44,10 +44,15 @@ public class Challenge {
         return endTime;
     }
 
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
     public static Challenge fromParseObject(ParseObject parseChallenge) {
         Challenge challenge = new Challenge();
         challenge.setName(parseChallenge.getString(Challenge.PARSE_NAME));
         challenge.setId(parseChallenge.getString(Challenge.PARSE_ID));
+        challenge.setEndTime("9/30 9:00AM");
         return challenge;
     }
 
