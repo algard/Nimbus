@@ -56,7 +56,8 @@ public class ChallengeListFragment extends ListFragment {
         mClientID = null;
 
         mUserChallenges = new ArrayList<>();
-        mChallengeListAdapter = new ChallengeListAdapter(getActivity(), android.R.id.text1, mUserChallenges);
+        boolean isClientMode = mClientID == null;
+        mChallengeListAdapter = new ChallengeListAdapter(getActivity(), android.R.id.text1, mUserChallenges, isClientMode);
         setListAdapter(mChallengeListAdapter);
 
         getChallenges();
