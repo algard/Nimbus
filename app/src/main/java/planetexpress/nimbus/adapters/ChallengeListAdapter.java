@@ -32,10 +32,10 @@ public class ChallengeListAdapter extends ArrayAdapter<Challenge> {
         }
 
         TextView challengeName = (TextView)convertView.findViewById(R.id.challenge_title);
-        TextView challengeTime = (TextView)convertView.findViewById(R.id.challenge_time);
+        TextView challengeTime = (TextView)convertView.findViewById(R.id.time_remaining);
 
         challengeName.setText(challenge.getName());
-        challengeTime.setText(challenge.getEndTime());
+        challengeTime.setText("5 days remaining");
 
         return convertView;
     }
