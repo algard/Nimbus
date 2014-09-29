@@ -51,7 +51,10 @@ public class ChallengeListFragment extends ListFragment {
         if (getArguments() != null) {
             mClientID = getArguments().getString(ARG_CLIENT_ID);
         }
-        // TODO: Change Adapter to display your content
+
+        //force it to get all challenges for now, TODO remove this line
+        mClientID = null;
+
         mUserChallenges = new ArrayList<>();
         mChallengeListAdapter = new ChallengeListAdapter(getActivity(), android.R.id.text1, mUserChallenges);
         setListAdapter(mChallengeListAdapter);
@@ -64,7 +67,6 @@ public class ChallengeListFragment extends ListFragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View view = inflater.inflate(R.layout.challenge_list_fragment, null);
-
         //HERE BE INJECTION!!!
         ButterKnife.inject(this, view);
 

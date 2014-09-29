@@ -28,12 +28,10 @@ public class MindbodyRepository {
     }
 
     public MindbodyRepository(Context context){
-        ParseObject testObject = new ParseObject(Challenge.PARSE_CLASS);
-        testObject.put(Challenge.PARSE_NAME, "my name");
-        testObject.put(Challenge.PARSE_TIME, "2");
-        testObject.saveInBackground();
-
-
+//        ParseObject testObject = new ParseObject(Challenge.PARSE_CLASS);
+//        testObject.put(Challenge.PARSE_NAME, "my name");
+//        testObject.put(Challenge.PARSE_TIME, "2");
+//        testObject.saveInBackground();
         this.mContext = context;
     }
 
@@ -55,7 +53,7 @@ public class MindbodyRepository {
     }
 
     //TODO get the list of challenges from Parse
-    public ArrayList<Challenge> getChallengesForUser(String mClientID, final ChallengeDataListener listener) {
+    public ArrayList<Challenge> getChallengesForUser(String mClientID, ) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(Challenge.PARSE_CLASS);
         query.whereEqualTo("", "Dan Stemkoski");
         query.findInBackground(new FindCallback<ParseObject>() {
