@@ -1,27 +1,35 @@
 package planetexpress.nimbus;
 
+import com.parse.ParseObject;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Challenge {
-    private int mId;
-    private int mName;
+    public static final String PARSE_NAME = "name";
+    public static final String PARSE_ID = "id";
+    public static final String PARSE_CLASS = "Challenge";
+    public static final String PARSE_TIME = "endTime";
+
+    private String mId;
+    private String mName;
     private ArrayList<Client> mParticipants;
     private String endTime;
 
-    public int getId() {
+    public String getId() {
         return mId;
     }
 
-    public void setId(int mId) {
+    public void setId(String mId) {
         this.mId = mId;
     }
 
-    public int getName() {
+    public String getName() {
         return mName;
     }
 
-    public void setName(int mName) {
-        this.mName = mName;
+    public void setName(String name) {
+        this.mName = name;
     }
 
     public ArrayList<Client> getParticipants() {
@@ -34,5 +42,20 @@ public class Challenge {
 
     public String getEndTime() {
         return endTime;
+    }
+
+    public static Challenge fromParseObject(ParseObject parseChallenge) {
+        Challenge challenge = new Challenge();
+        challenge.setName(parseChallenge.getString(Challenge.PARSE_NAME));
+        challenge.setId(parseChallenge.getString(Challenge.PARSE_ID));
+        return challenge;
+    }
+
+    public static ArrayList<Challenge> fromParseObjects(List<ParseObject> objectList){
+        ArrayList<Challenge> result = new ArrayList<>();
+        for(ParseObject challenge : objectList){
+            result.add(Challenge.fromParseObject(challenge));
+        }
+        return result;
     }
 }

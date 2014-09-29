@@ -27,7 +27,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class ClientChallengeActivity extends Activity {
+public class ClientChallengeActivity extends Activity implements ChallengeListFragment.OnFragmentInteractionListener {
     private static final String TAG = "jibbityJawbone";
     private static final String JAWBONE_CLIENT_ID = "340xbpM7UNY";
     private static final String JAWBONE_CLIENT_SECRET = "9a2148dc6e935d0c40cac7af5bd47f089e301a50";
@@ -39,6 +39,7 @@ public class ClientChallengeActivity extends Activity {
 
     //TODO get this value from the user
     private String mClientID = "david";
+    private ChallengeListFragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,8 @@ public class ClientChallengeActivity extends Activity {
         });
 
         //TODO setup clientID / jawbone interaction first, as a sort of FTU-style popup?
-        getFragmentManager().beginTransaction().add(ChallengeListFragment.newInstance(mClientID), "fragTag").commit();
+        mFragment = ChallengeListFragment.newInstance(mClientID);
+        getFragmentManager().beginTransaction().add(mFragment, "fragTag").commit();
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -137,5 +139,10 @@ public class ClientChallengeActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onChallengeSelected(String id) {
+        //TODO launch challenge details activity
     }
 }

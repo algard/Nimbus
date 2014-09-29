@@ -52,7 +52,10 @@ public class ChallengeListFragment extends ListFragment {
             mClientID = getArguments().getString(ARG_CLIENT_ID);
         }
 
-        // TODO: Change Adapter to display your content
+        //force it to get all challenges for now, TODO remove this line
+        mClientID = null;
+
+        mUserChallenges = new ArrayList<>();
         mChallengeListAdapter = new ChallengeListAdapter(getActivity(), android.R.id.text1, mUserChallenges);
         setListAdapter(mChallengeListAdapter);
 
@@ -64,7 +67,6 @@ public class ChallengeListFragment extends ListFragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View view = inflater.inflate(R.layout.challenge_list_fragment, null);
-
         //HERE BE INJECTION!!!
         ButterKnife.inject(this, view);
 
@@ -74,7 +76,31 @@ public class ChallengeListFragment extends ListFragment {
 
     private void getChallenges(){
         MindbodyRepository repo = new MindbodyRepository(getActivity());
-        mUserChallenges = repo.getChallengesForUser(mClientID);
+        if(mClientID != null) {
+            repo.getChallengesForUser(mClientID, new MindbodyRepository.ChallengeDataListener() {
+                @Override
+                public void onData(ArrayList<Challenge> result) {
+                    mUserChallenges.addAll(result);
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            });
+        }else{
+            repo.getAllChallenges(new MindbodyRepository.ChallengeDataListener() {
+                @Override
+                public void onData(ArrayList<Challenge> result) {
+                    mUserChallenges.addAll(result);
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            });
+        }
     }
 
 
@@ -119,7 +145,7 @@ public class ChallengeListFragment extends ListFragment {
     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onChallengeSelected(int id);
+        public void onChallengeSelected(String id);
     }
 
 }

@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,7 +17,6 @@ import planetexpress.nimbus.R;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 
 
 public class ChallengeSetup extends Activity {
@@ -55,7 +53,7 @@ public class ChallengeSetup extends Activity {
 
     public void getChallenges(){
         MindbodyRepository repository = new MindbodyRepository(this);
-        repository.getAllChallenges(new MindbodyRepository.DataListener() {
+        repository.getAllChallenges(new MindbodyRepository.ChallengeDataListener() {
             @Override
             public void onData(ArrayList<Challenge> result) {
                 // do something with result
