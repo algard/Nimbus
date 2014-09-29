@@ -24,15 +24,13 @@ import butterknife.OnClick;
 public class ChallengeSetup extends Activity {
 
     @InjectView(R.id.fabbutton) protected Button fabButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_setup);
+        ButterKnife.inject(this);
 
-        Button fab = (Button) findViewById(R.id.fabbutton);
-
-        fab.setOnClickListener(new View.OnClickListener() {
+        fabButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 onAddButtonPressed(v);
             }
@@ -44,8 +42,8 @@ public class ChallengeSetup extends Activity {
         mOutlineCircle = new Outline();
         mOutlineCircle.setRoundRect(0, 0, shapeSize, shapeSize, shapeSize / 2);
 
-        fab.setOutline(mOutlineCircle);
-        fab.setClipToOutline(true);
+        fabButton.setOutline(mOutlineCircle);
+        fabButton.setClipToOutline(true);
 
         getChallenges();
     }
