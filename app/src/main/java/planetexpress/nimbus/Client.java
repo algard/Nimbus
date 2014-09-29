@@ -14,6 +14,9 @@ public class Client {
     public static final String PARSE_ID = "id";
     public String mId;
     public String mName;
+    private ArrayList<Challenge> achievements;
+    private ArrayList<Challenge> challenges;
+
 
     public String getName() {
         return mName;

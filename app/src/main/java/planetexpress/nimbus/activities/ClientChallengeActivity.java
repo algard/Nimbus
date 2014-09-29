@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.jawbone.upplatformsdk.api.ApiManager;
 import com.jawbone.upplatformsdk.api.response.OauthAccessTokenResponse;
@@ -159,6 +160,6 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
 
     @Override
     public void onChallengeSelected(String id) {
-        //TODO launch challenge details activity
+        Toast.makeText(this,"Challenge Clicked: "+id, Toast.LENGTH_SHORT).show();
     }
 }

@@ -52,6 +52,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Edit"/>
+
+            <Button
+                android:layout_marginRight="35dp"
+                android:id="@+id/share_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Share"/>
+
+            <Button
+                android:id="@+id/more_info_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="More Info"/>
         </LinearLayout>
 
 

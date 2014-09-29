@@ -33,7 +33,6 @@ import planetexpress.nimbus.fragments.ChallengeDetailsFragment;
 
 
 public class ChallengeSetup extends Activity {
-
     private static final String TAG = "ChallengeSetupActivity";
 
     @InjectView(R.id.fabbutton) protected Button fabButton;

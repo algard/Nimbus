@@ -27,6 +27,8 @@ public class ChallengeListFragment extends ListFragment {
     private ArrayList<Challenge> mUserChallenges;
     private ChallengeListAdapter mChallengeListAdapter;
 
+    public ChallengeListFragment() {
+    }
 
     // TODO: Rename and change types of parameters
     public static ChallengeListFragment newInstance(String clientID) {
@@ -35,13 +37,6 @@ public class ChallengeListFragment extends ListFragment {
         args.putString(ARG_CLIENT_ID, clientID);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public ChallengeListFragment() {
     }
 
     @Override
