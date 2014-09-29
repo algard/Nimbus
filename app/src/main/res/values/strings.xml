@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Nimbus</string>
-    <string name="hello_world">How many steps can you get per day? 5,000? 10,000? 20,000? 30,000???  This challenge will challenge you to do at least 15,000 steps per day. Starts 9/29 Ends 10/4.</string>
+    <string name="hello_world">How many steps can you get per day? 5,000? 10,000? 20,000? 30,000???  This challenge will challenge you to do at least 15,000 steps per day.</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_my">MyActivity</string>
     <string name="title_activity_client_challenge">ClientChallengeActivity</string>
