@@ -15,7 +15,10 @@
 
     <FrameLayout
         android:id="@+id/container"
+        android:layout_below="@id/authorizeButton"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"></FrameLayout>
+        android:layout_height="fill_parent">
+
+    </FrameLayout>
 
 </RelativeLayout>
