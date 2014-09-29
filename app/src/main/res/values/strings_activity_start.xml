@@ -1,0 +1,7 @@
+<resources>
+        <string name="title_activity_start">Select App</string>
+
+    <string name="staff_side">Staff Side</string>
+    <string name="client_side">Client Side</string>
+
+</resources>
