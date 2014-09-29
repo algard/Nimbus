@@ -3,13 +3,17 @@ package planetexpress.nimbus.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.app.ListFragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import butterknife.ButterKnife;
 import planetexpress.nimbus.Challenge;
 import planetexpress.nimbus.MindbodyRepository;
+import planetexpress.nimbus.R;
 import planetexpress.nimbus.adapters.ChallengeListAdapter;
 
 /**
@@ -48,16 +52,60 @@ public class ChallengeListFragment extends ListFragment {
             mClientID = getArguments().getString(ARG_CLIENT_ID);
         }
 
-        // TODO: Change Adapter to display your content
+        //force it to get all challenges for now, TODO remove this line
+        mClientID = null;
+
+        mUserChallenges = new ArrayList<>();
+        Challenge fake = new Challenge();
+        fake.setName("Fake");
+        fake.setId("aosdasdasd");
+        mUserChallenges.add(fake);
         mChallengeListAdapter = new ChallengeListAdapter(getActivity(), android.R.id.text1, mUserChallenges);
         setListAdapter(mChallengeListAdapter);
 
         getChallenges();
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+
+        View view = inflater.inflate(R.layout.challenge_list_fragment, null);
+        //HERE BE INJECTION!!!
+        ButterKnife.inject(this, view);
+
+        return view;
+    }
+
+
     private void getChallenges(){
         MindbodyRepository repo = new MindbodyRepository(getActivity());
-        mUserChallenges = repo.getChallengesForUser(mClientID);
+        if(mClientID != null) {
+            repo.getChallengesForUser(mClientID, new MindbodyRepository.ChallengeDataListener() {
+                @Override
+                public void onData(ArrayList<Challenge> result) {
+                    mUserChallenges.addAll(result);
+                    mChallengeListAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            });
+        }else{
+            repo.getAllChallenges(new MindbodyRepository.ChallengeDataListener() {
+                @Override
+                public void onData(ArrayList<Challenge> result) {
+                    mUserChallenges.addAll(result);
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            });
+        }
     }
 
 
@@ -102,7 +150,7 @@ public class ChallengeListFragment extends ListFragment {
     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onChallengeSelected(int id);
+        public void onChallengeSelected(String id);
     }
 
 }

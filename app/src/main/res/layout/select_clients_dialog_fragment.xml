@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="25dp"
+    android:paddingRight="22dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="5dp"
+    >
+
+    <TextView
+        android:id="@+id/selectStaffTitle"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Clients"
+        android:fontFamily="sans-serif"
+        android:paddingTop="10dp"
+        android:textColor="#636363"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/allStaffLabel"
+        android:text="All Clients"
+        android:fontFamily="sans-serif"
+        android:paddingTop="5dp"
+        android:paddingRight="2dp"
+        android:clickable="true"
+        android:textColor="#7D7D7D"
+        android:textSize="14sp"
+        android:layout_toEndOf="@+id/allStaffCheckbox"
+        android:layout_below="@+id/selectStaffTitle" />
+
+    <CheckBox
+        android:id="@+id/allStaffCheckbox"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:color="#ff7906"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/selectStaffTitle"
+        android:layout_alignParentStart="true" />
+
+    <View
+        android:id="@+id/topDiv"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/allStaffCheckbox"
+        android:background="#7D7D7D"
+        android:layout_marginTop="16dp"
+
+
+        />
+
+    <ListView
+        android:id="@+id/staffListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_above="@+id/buttonLayout"
+        tools:listitem="@layout/select_clients_list_item"
+        android:layout_below="@+id/allStaffCheckbox">
+    </ListView>
+
+    <View
+        android:id="@+id/bottomDiv"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/staffListView"
+        android:background="#7D7D7D"
+        android:layout_marginBottom="16dp"
+        android:paddingTop="5dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/cancelButton"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:textColor="#7D7D7D"
+            android:textAllCaps="true"/>
+
+
+
+        <Button
+            android:id="@+id/saveButton"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Save"
+            android:textAllCaps="true"
+            android:textColor="#4A90E2" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/x_button"
+        android:padding="5dp"
+        android:button="@drawable/x_button"
+        android:id="@+id/xButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

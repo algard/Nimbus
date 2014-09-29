@@ -5,16 +5,21 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="planetexpress.nimbus.activities.ClientChallengeActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin">
 
-    <!--- todo move to actionbar -->
-    <Button
-        android:id="@+id/authorizeButton"
+    <TextView
+        android:text="@string/hello_world"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Connect To Jawbone"
-        android:layout_margin="10dp"/>
+        android:id="@+id/textView" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addClientsButton"
+        android:text="Add Clients"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true" />
+
 
 </RelativeLayout>

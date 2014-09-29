@@ -1,13 +1,13 @@
 package planetexpress.nimbus.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Outline;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -15,19 +15,22 @@ import planetexpress.nimbus.Challenge;
 import planetexpress.nimbus.MindbodyRepository;
 import planetexpress.nimbus.R;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 
 public class ChallengeSetup extends Activity {
 
+    @InjectView(R.id.fabbutton) protected Button fabButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_setup);
+        ButterKnife.inject(this);
 
-        Button fab = (Button) findViewById(R.id.fabbutton);
-
-        fab.setOnClickListener(new View.OnClickListener() {
+        fabButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                Toast.makeText(getApplicationContext(), "Fab button pressed", Toast.LENGTH_LONG).show();
+                onAddButtonPressed(v);
             }
         });
 
@@ -37,15 +40,20 @@ public class ChallengeSetup extends Activity {
         mOutlineCircle = new Outline();
         mOutlineCircle.setRoundRect(0, 0, shapeSize, shapeSize, shapeSize / 2);
 
-        fab.setOutline(mOutlineCircle);
-        fab.setClipToOutline(true);
+        fabButton.setOutline(mOutlineCircle);
+        fabButton.setClipToOutline(true);
 
         getChallenges();
     }
 
+    private void onAddButtonPressed(View v) {
+        Intent challengeDetailsIntent = new Intent(this, ChallengeDetailsActivity.class);
+        startActivity(challengeDetailsIntent);
+    }
+
     public void getChallenges(){
         MindbodyRepository repository = new MindbodyRepository(this);
-        repository.getAllChallenges(new MindbodyRepository.DataListener() {
+        repository.getAllChallenges(new MindbodyRepository.ChallengeDataListener() {
             @Override
             public void onData(ArrayList<Challenge> result) {
                 // do something with result
