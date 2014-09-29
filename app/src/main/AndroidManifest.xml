@@ -81,7 +81,7 @@
             android:name=".ChallengeReceiver"
             android:exported="false" >
             <intent-filter>
-                <action android:name="planetexpress.nimbus.UPDATE_STATUS" />
+                <action android:name="planetexpress.nimbus.CREATE_CHALLENGE" />
             </intent-filter>
         </receiver>
     </application>

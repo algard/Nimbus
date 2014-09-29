@@ -44,27 +44,7 @@ public class ChallengeSetup extends Activity {
 
         fabButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                ParsePush push = new ParsePush();
-//
-                JSONObject data = null;
-                try {
-                    data = new JSONObject("{\"action\": \"planetexpress.nimbus.UPDATE_STATUS\", \"name\": \"Test!!\" }");
-
-                    push.setChannel("Test");
-                    push.setData(data);
-                    push.setMessage("Testing the test");
-                    push.sendInBackground(new SendCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            Log.d(TAG, "Message Done Sending -- Challenge Created");
-
-                        }
-                    });
                     onAddButtonPressed(v);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
             }
         });
 

@@ -18,6 +18,8 @@ public class ChallengeReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        //Ignore if you are a staff
+        if(StaticInstance.mIsStaff) return;
         try {
             String action = intent.getAction();
             String channel = intent.getExtras().getString("com.parse.Channel");

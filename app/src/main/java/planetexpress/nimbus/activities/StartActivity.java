@@ -36,6 +36,7 @@ import com.parse.PushService;
 import java.util.ArrayList;
 import java.util.List;
 import planetexpress.nimbus.R;
+import planetexpress.nimbus.StaticInstance;
 
 public class StartActivity extends Activity {
     private Button mStaffSideButton;
@@ -53,6 +54,7 @@ public class StartActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(StartActivity.this, ChallengeSetup.class);
+                StaticInstance.mIsStaff = true;
                 startActivity(intent);
             }
         });
@@ -61,6 +63,7 @@ public class StartActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(StartActivity.this, ClientChallengeActivity.class);
+                StaticInstance.mIsStaff = false;
                 startActivity(intent);
             }
         });
