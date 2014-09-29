@@ -3,10 +3,13 @@ package planetexpress.nimbus;
 import com.parse.ParseObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Challenge {
-    private static final String PARSE_NAME = "name";
-    private static final String PARSE_ID = "id";
+    public static final String PARSE_NAME = "name";
+    public static final String PARSE_ID = "id";
+    public static final String PARSE_CLASS = "Challenge";
+    public static final String PARSE_TIME = "endTime";
 
     private String mId;
     private String mName;
@@ -46,5 +49,13 @@ public class Challenge {
         challenge.setName(parseChallenge.getString(Challenge.PARSE_NAME));
         challenge.setId(parseChallenge.getString(Challenge.PARSE_ID));
         return challenge;
+    }
+
+    public static ArrayList<Challenge> fromParseObjects(List<ParseObject> objectList){
+        ArrayList<Challenge> result = new ArrayList<>();
+        for(ParseObject challenge : objectList){
+            result.add(Challenge.fromParseObject(challenge));
+        }
+        return result;
     }
 }
