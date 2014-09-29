@@ -1,7 +1,8 @@
 package planetexpress.nimbus.activities;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.graphics.Outline;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.parse.Parse;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParsePush;
@@ -27,6 +27,7 @@ import planetexpress.nimbus.R;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import planetexpress.nimbus.fragments.ChallengeDetailsFragment;
 
 
 public class ChallengeSetup extends Activity {
@@ -80,8 +81,10 @@ public class ChallengeSetup extends Activity {
     }
 
     private void onAddButtonPressed(View v) {
-        Intent challengeDetailsIntent = new Intent(this, ChallengeDetailsActivity.class);
-        startActivity(challengeDetailsIntent);
+        Fragment detailsFragment = new ChallengeDetailsFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, detailsFragment);
+        transaction.commit();
     }
 
     public void getChallenges(){
