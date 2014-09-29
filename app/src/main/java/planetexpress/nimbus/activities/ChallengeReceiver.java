@@ -19,18 +19,18 @@ public class ChallengeReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         try {
-        String action = intent.getAction();
-        String channel = intent.getExtras().getString("NimbusChallengeChannel");
-        JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
+            String action = intent.getAction();
+            String channel = intent.getExtras().getString("com.parse.Channel");
+            JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
 
-        Log.d(TAG, "got action " + action + " on channel " + channel + " with:");
-        Iterator itr = json.keys();
-        while (itr.hasNext()) {
-            String key = (String) itr.next();
-            Log.d(TAG, "..." + key + " => " + json.getString(key));
+            Log.d(TAG, "got action " + action + " on channel " + channel + " with:");
+            Iterator itr = json.keys();
+            while (itr.hasNext()) {
+                String key = (String) itr.next();
+                Log.d(TAG, "..." + key + " => " + json.getString(key));
+            }
+        } catch (JSONException e) {
+            Log.d(TAG, "JSONException: " + e.getMessage());
         }
-    } catch (JSONException e) {
-        Log.d(TAG, "JSONException: " + e.getMessage());
-    }
     }
 }
