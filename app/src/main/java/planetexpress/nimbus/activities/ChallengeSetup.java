@@ -1,6 +1,7 @@
 package planetexpress.nimbus.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Outline;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,8 +16,14 @@ import planetexpress.nimbus.Challenge;
 import planetexpress.nimbus.MindbodyRepository;
 import planetexpress.nimbus.R;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
 
 public class ChallengeSetup extends Activity {
+
+    @InjectView(R.id.fabbutton) protected Button fabButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +34,7 @@ public class ChallengeSetup extends Activity {
 
         fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                Toast.makeText(getApplicationContext(), "Fab button pressed", Toast.LENGTH_LONG).show();
+                onAddButtonPressed(v);
             }
         });
 
@@ -41,6 +48,11 @@ public class ChallengeSetup extends Activity {
         fab.setClipToOutline(true);
 
         getChallenges();
+    }
+
+    private void onAddButtonPressed(View v) {
+        Intent challengeDetailsIntent = new Intent(this, ChallengeDetailsActivity.class);
+        startActivity(challengeDetailsIntent);
     }
 
     public void getChallenges(){
