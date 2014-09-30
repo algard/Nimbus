@@ -34,7 +34,7 @@ public class ChallengeRosterActivity extends Activity {
         mbRepo.getClientsInChallenge(mChallengeName, new MindbodyRepository.ClientDataListener() {
             @Override
             public void onData(ArrayList<Client> result) {
-                
+
             }
 
             @Override
