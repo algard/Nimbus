@@ -10,6 +10,8 @@ import org.json.JSONObject;
 
 import java.util.Iterator;
 
+import planetexpress.nimbus.activities.ClientChallengeActivity;
+
 public class ChallengeReceiver extends BroadcastReceiver {
     private static final String TAG = "ChallengeReceiver";
 

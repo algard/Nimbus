@@ -8,15 +8,11 @@ import java.util.List;
 /**
  * Created by david.algar on 9/27/2014.
  */
-public class Client extends ParseObject {
-    public static final String PARSE_CLASS = "Client";
+public class Client {
     public static final String PARSE_NAME = "Name";
     public static final String PARSE_ID = "objectId";
     public String mId;
     public String mName;
-    private ArrayList<Challenge> achievements;
-    private ArrayList<Challenge> challenges;
-
 
     public String getName() {
         return mName;
@@ -36,9 +32,12 @@ public class Client extends ParseObject {
     }
 
     public static Client fromParseObject(ParseObject object){
+        if(object == null) return null;
+
         Client client = new Client();
-        client.setName(object.getString(PARSE_NAME));
         client.setId(object.getString(PARSE_ID));
+        client.setName(object.getString(PARSE_NAME));
+
         return client;
     }
 
