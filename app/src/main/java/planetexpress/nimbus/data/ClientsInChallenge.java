@@ -50,4 +50,13 @@ public class ClientsInChallenge {
         return result;
     }
 
+    public static ParseObject toParseObject(String clientName, String challengeId, boolean completed, boolean accepted){
+        ParseObject object =  new ParseObject(PARSE_CLASS);
+        object.put(PARSE_CLIENT_ID, clientName);
+        object.put(PARSE_COMPLETED, completed);
+        object.put(PARSE_ACCEPTED_CHALLENGE, accepted);
+        object.put(PARSE_CHALLENGE_ID, challengeId);
+        return object;
+    }
+
 }

@@ -109,6 +109,10 @@ public class MindbodyRepository {
         }
     }
 
+    public void acceptChallenge(String clientName, String challengeName){
+        ClientsInChallenge.toParseObject(clientName, challengeName, false, true).saveInBackground();
+    }
+
     public void getClientsInChallenge(String challengeName, final ClientsInChallengeListener listener){
         ParseQuery<ParseObject> query = ParseQuery.getQuery(ClientsInChallenge.PARSE_CLASS);
         query.whereEqualTo(ClientsInChallenge.PARSE_CHALLENGE_ID, challengeName);
