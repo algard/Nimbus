@@ -5,9 +5,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import planetexpress.nimbus.Client;
 import planetexpress.nimbus.MindbodyRepository;
 import planetexpress.nimbus.R;
@@ -18,11 +23,20 @@ public class ChallengeRosterActivity extends Activity {
     private String mChallengeName;
     public static final String EXTRA_NAME = "challenge_name";
     MindbodyRepository mbRepo;
+    @InjectView(R.id.participatingNumber)TextView numberAccepted;
+    @InjectView(R.id.pendingNumber)TextView numberPending;
+    @InjectView(R.id.participantsList)ListView participantsList;
+    @InjectView(R.id.pendingList)ListView pendingList;
+
+    private List<String> nameArrayList = new ArrayList<String>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_roster);
+        ButterKnife.inject(this);
 
         if(getIntent() != null){
             mChallengeName = getIntent().getStringExtra(EXTRA_NAME);
@@ -36,7 +50,15 @@ public class ChallengeRosterActivity extends Activity {
         mbRepo.getClientsInChallenge(mChallengeName, new MindbodyRepository.ClientsInChallengeListener() {
             @Override
             public void onData(ArrayList<ClientsInChallenge> result) {
-                Log.d("TAG", "Size: "+result.size());
+                int accepted = 0;
+                for (int i = 0; i < result.size(); i++) {
+                    if (result.get(i).AcceptedChallenge) {
+                        accepted++;
+                        nameArrayList.add(result.get(i).ClientID);
+                    }
+                }
+                numberAccepted.setText(accepted + " Participating");
+                numberPending.setText(result.size()-accepted + " Pending");
             }
 
             @Override
