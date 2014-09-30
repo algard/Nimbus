@@ -148,8 +148,8 @@ public class ChallengeDetailsFragment extends Fragment {
     }
 
     private void setupSpinners() {
-        mChallengeTypeOptions.add("Sleep");
         mChallengeTypeOptions.add("Steps");
+        mChallengeTypeOptions.add("Sleep");
         mChallengeTypeOptions.add("Class Attendance");
         mChallengeTypeOptions.add("Nutrition");
         mChallengeTypeArrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_spinner_item, mChallengeTypeOptions);
