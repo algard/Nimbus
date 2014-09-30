@@ -4,13 +4,15 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import planetexpress.nimbus.MindbodyRepository;
 import planetexpress.nimbus.R;
 
 public class ChallengeRosterActivity extends Activity {
 
     private String mChallengeName;
     public static final String EXTRA_NAME = "challenge_name";
-
+    MindbodyRepository mbRepo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +23,11 @@ public class ChallengeRosterActivity extends Activity {
             mChallengeName = getIntent().getStringExtra(EXTRA_NAME);
         }
         if(mChallengeName == null){
-            mChallengeName = "Challenge!";
+            mChallengeName = "Challenge";
         }
 
-        getActionBar().setTitle(mChallengeName);
         getActionBar().setTitle(mChallengeName+" Roster");
+        mbRepo =  new MindbodyRepository(this);
     }
 
     @Override
