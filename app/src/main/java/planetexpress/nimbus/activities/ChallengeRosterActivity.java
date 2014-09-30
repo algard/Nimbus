@@ -29,6 +29,8 @@ public class ChallengeRosterActivity extends Activity {
     @InjectView(R.id.pendingList)ListView pendingList;
 
     private List<String> nameArrayList = new ArrayList<String>();
+    private List<String> pendingArrayList = new ArrayList<String>();
+
 
 
 
@@ -55,6 +57,9 @@ public class ChallengeRosterActivity extends Activity {
                     if (result.get(i).AcceptedChallenge) {
                         accepted++;
                         nameArrayList.add(result.get(i).ClientID);
+                    }
+                    else{
+                        pendingArrayList.add(result.get(i).ClientID);
                     }
                 }
                 numberAccepted.setText(accepted + " Participating");
