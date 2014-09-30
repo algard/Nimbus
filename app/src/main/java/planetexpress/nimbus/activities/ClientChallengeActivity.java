@@ -98,7 +98,7 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
 
         if (!accessToken.isEmpty()) {
             ApiManager.getRequestInterceptor().setAccessToken(accessToken);
-            pullStepData();
+            //pullStepData();
         }
     }
 
@@ -133,7 +133,7 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
                 editor.putString(UpPlatformSdkConstants.UP_PLATFORM_REFRESH_TOKEN, result.refresh_token);
                 editor.commit();
 
-                pullStepData();
+                //pullStepData();
 
                 Log.e(TAG, "accessToken:" + result.access_token);
             } else {
