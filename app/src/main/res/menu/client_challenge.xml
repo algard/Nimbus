@@ -9,4 +9,8 @@
         android:title="Set Username"
         android:orderInCategory="100"
         android:showAsAction="never" />
+    <item android:id="@+id/action_refresh"
+        android:title="Refresh"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
 </menu>
