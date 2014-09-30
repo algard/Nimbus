@@ -186,6 +186,18 @@ public class ChallengeDetailsFragment extends Fragment {
             @Override
             public void onData(ArrayList<Client> result) {
                 clientList = result;
+                SelectClientsDialog selectClientsDialog = new SelectClientsDialog(clientList, new WireTaskCallback<ArrayList<Client>>() {
+                    @Override
+                    public void onFinished(ArrayList<Client> result) {
+
+                    }
+                }, new Runnable() {
+                    @Override
+                    public void run() {
+
+                    }
+                });
+                selectClientsDialog.show(getFragmentManager(), null);
             }
 
             @Override
@@ -193,17 +205,6 @@ public class ChallengeDetailsFragment extends Fragment {
 
             }
         });
-        SelectClientsDialog selectClientsDialog = new SelectClientsDialog(clientList, new WireTaskCallback<ArrayList<Client>>() {
-            @Override
-            public void onFinished(ArrayList<Client> result) {
 
-            }
-        }, new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        });
-        selectClientsDialog.show(getFragmentManager(), null);
     }
 }
