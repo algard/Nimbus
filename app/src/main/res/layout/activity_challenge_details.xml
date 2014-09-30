@@ -13,12 +13,13 @@
 
         <TextView
             android:paddingLeft="30dp"
-            android:textSize="20dp"
+            android:textSize="24dp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Title" />
         <EditText
+            android:layout_marginLeft="30dp"
             android:id="@+id/challengeTitleField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -37,7 +38,7 @@
 
                 <TextView
                     android:paddingLeft="30dp"
-                    android:textSize="20dp"
+                    android:textSize="24dp"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -66,7 +67,7 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:textSize="20dp"
+                    android:textSize="24dp"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -85,14 +86,14 @@
 
         </LinearLayout>
         <TextView
-            android:paddingLeft="30dp"
-            android:textSize="20dp"
+            android:layout_marginLeft="30dp"
+            android:textSize="24dp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Description"/>
         <EditText
-            android:paddingLeft="30dp"
+            android:layout_marginLeft="30dp"
             android:id="@+id/challengeDescription"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -108,7 +109,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"/>
         <TextView
-            android:textSize="20dp"
+            android:textSize="24dp"
             android:paddingLeft="5dp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
@@ -137,7 +138,7 @@
         </LinearLayout>
 
         <TextView
-            android:textSize="20dp"
+            android:textSize="24dp"
             android:paddingLeft="30dp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
@@ -165,7 +166,7 @@
                 android:spinnerMode="dropdown"/>
         </LinearLayout>
         <TextView
-            android:textSize="20dp"
+            android:textSize="24dp"
             android:paddingLeft="30dp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
@@ -182,21 +183,32 @@
             android:layout_marginLeft="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/orange12"
+            android:padding="15dp"
             android:id="@+id/addClientsButton"
-            android:text="Add Clients" />
+            android:textSize="18dp"
+            android:text="Add Clients"
+            android:layout_gravity="center_horizontal" />
+
         <TextView
             android:layout_marginLeft="30dp"
             android:id="@+id/numberOfParticipants"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0 Participants"/>
+            android:text="0 Participants"
+            android:layout_gravity="center_horizontal" />
 
         <Button
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
             android:layout_width="wrap_content"
+            android:padding="15dp"
+            android:background="@color/orange03"
             android:layout_height="wrap_content"
             android:id="@+id/startChallengeButton"
-            android:text="Start Challenge"/>
+            android:textSize="18dp"
+            android:text="Start Challenge"
+            android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
     </ScrollView>
