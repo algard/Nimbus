@@ -23,7 +23,10 @@ import com.jawbone.upplatformsdk.utils.UpPlatformSdkConstants;
 import com.parse.PushService;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import planetexpress.nimbus.Client;
+import planetexpress.nimbus.MindbodyRepository;
 import planetexpress.nimbus.R;
 
 import planetexpress.nimbus.fragments.ChallengeListFragment;
@@ -58,6 +61,20 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
         // we are requesting all permissions
         authScope  = new ArrayList<UpPlatformSdkConstants.UpPlatformAuthScope>();
         authScope.add(UpPlatformSdkConstants.UpPlatformAuthScope.ALL);
+
+        MindbodyRepository rep = new MindbodyRepository(this);
+
+        rep.getAllClients(new MindbodyRepository.ClientDataListener() {
+            @Override
+            public void onData(ArrayList<Client> result) {
+                Log.d("TAG", "Size: "+result.size());
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
 
         //TODO Matt - this button was hidden, moved to the actionbar, handled in OnOptionItemClicked() down below
 //        Button oAuthAuthorizeButton = (Button) findViewById(R.id.authorizeButton);
@@ -98,6 +115,8 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
                         JAWBONE_CLIENT_SECRET,
                         code,
                         accessTokenRequestListener);
+
+                //TODO @matt - maybe we can show the list fragment?
             }
         }
     }
