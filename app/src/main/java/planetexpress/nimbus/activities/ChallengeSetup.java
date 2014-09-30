@@ -47,7 +47,7 @@ public class ChallengeSetup extends Activity implements ChallengeListFragment.On
         ongoingTab.setActivated(true);
         addNewTab.setActivated(false);
         fabButton.setVisibility(View.VISIBLE);
-
+        setTitle("Ongoing Challenges");
         loadChallengeList();
     }
 
@@ -66,6 +66,7 @@ public class ChallengeSetup extends Activity implements ChallengeListFragment.On
         ParseAnalytics.trackAppOpened(getIntent());
         ongoingTab.setActivated(true);
         addNewTab.setActivated(false);
+        setTitle("Ongoing Challenges");
         fabButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                     onAddButtonPressed();
