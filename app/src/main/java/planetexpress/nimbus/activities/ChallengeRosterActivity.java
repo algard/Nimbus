@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
+import planetexpress.nimbus.Client;
 import planetexpress.nimbus.MindbodyRepository;
 import planetexpress.nimbus.R;
 
@@ -28,6 +31,17 @@ public class ChallengeRosterActivity extends Activity {
 
         getActionBar().setTitle(mChallengeName+" Roster");
         mbRepo =  new MindbodyRepository(this);
+        mbRepo.getClientsInChallenge(mChallengeName, new MindbodyRepository.ClientDataListener() {
+            @Override
+            public void onData(ArrayList<Client> result) {
+                
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
     }
 
     @Override
