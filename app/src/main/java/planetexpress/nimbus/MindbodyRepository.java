@@ -11,6 +11,8 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
+import planetexpress.nimbus.data.ClientsInChallenge;
+
 public class MindbodyRepository {
 
     private final Context mContext;
@@ -51,12 +53,19 @@ public class MindbodyRepository {
 
     //TODO get the list of challenges from Parse
     public ArrayList<Challenge> getChallengesForUser(String mClientID, final ChallengeDataListener listener) {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery(Challenge.PARSE_CLASS);
-        query.whereEqualTo("", "Dan Stemkoski");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(ClientsInChallenge.PARSE_CLASS);
+        query.whereEqualTo(ClientsInChallenge.PARSE_CLIENT_ID, mClientID);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {
-                //TODO see above for getAll()
+                if(e == null) {
+                    ArrayList<ClientsInChallenge> clients = ClientsInChallenge.fromParseObjects(parseObjects);
+
+                    //TODO
+                    //listener.onData();
+                }else {
+                    // WELL FUCK YOU THEN
+                }
             }
         });
 

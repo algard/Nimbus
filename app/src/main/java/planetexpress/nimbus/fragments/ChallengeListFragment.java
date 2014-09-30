@@ -22,7 +22,7 @@ public class ChallengeListFragment extends ListFragment {
     private OnFragmentInteractionListener mListener;
 
     private static final String ARG_CLIENT_ID = "clientID";
-    private String mClientID;
+    private String mClientParseId;
 
     private ArrayList<Challenge> mUserChallenges;
     private ChallengeListAdapter mChallengeListAdapter;
@@ -44,11 +44,11 @@ public class ChallengeListFragment extends ListFragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mClientID = getArguments().getString(ARG_CLIENT_ID);
+            mClientParseId = getArguments().getString(ARG_CLIENT_ID);
         }
 
         mUserChallenges = new ArrayList<>();
-        boolean isClientMode = mClientID != null;
+        boolean isClientMode = mClientParseId != null;
         mChallengeListAdapter = new ChallengeListAdapter(getActivity(), android.R.id.text1, mUserChallenges, isClientMode);
         setListAdapter(mChallengeListAdapter);
 
@@ -69,8 +69,8 @@ public class ChallengeListFragment extends ListFragment {
 
     private void getChallenges(){
         MindbodyRepository repo = new MindbodyRepository(getActivity());
-        if(mClientID != null) {
-            repo.getChallengesForUser(mClientID, new MindbodyRepository.ChallengeDataListener() {
+        if(mClientParseId != null) {
+            repo.getChallengesForUser(mClientParseId, new MindbodyRepository.ChallengeDataListener() {
                 @Override
                 public void onData(ArrayList<Challenge> result) {
                     mUserChallenges.addAll(result);

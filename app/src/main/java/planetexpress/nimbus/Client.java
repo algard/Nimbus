@@ -8,7 +8,7 @@ import java.util.List;
 public class Client {
     public static final String PARSE_CLASS = "Client";
     public static final String PARSE_NAME = "Name";
-    public static final String PARSE_ID = "objectId";
+
     public String mId;
     public String mName;
 
@@ -33,7 +33,7 @@ public class Client {
         if(object == null) return null;
 
         Client client = new Client();
-        client.setId(object.getString(PARSE_ID));
+        client.setId(object.getObjectId());
         client.setName(object.getString(PARSE_NAME));
 
         return client;

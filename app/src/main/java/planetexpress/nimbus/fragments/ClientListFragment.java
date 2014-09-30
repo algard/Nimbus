@@ -6,9 +6,10 @@ import android.app.ListFragment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import planetexpress.nimbus.R;
 
-import planetexpress.nimbus.fragments.dummy.DummyContent;
+import java.util.ArrayList;
+
+import planetexpress.nimbus.Client;
 
 /**
  * interface.
@@ -25,6 +26,8 @@ public class ClientListFragment extends ListFragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private ArrayList<Client> mClients;
 
     // TODO: Rename and change types of parameters
     public static ClientListFragment newInstance(String param1, String param2) {
@@ -53,8 +56,8 @@ public class ClientListFragment extends ListFragment {
         }
 
         // TODO: Change Adapter to display your content
-        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS));
+        setListAdapter(new ArrayAdapter<Client>(getActivity(),
+                android.R.layout.simple_list_item_1, android.R.id.text1, mClients));
     }
 
 
@@ -83,7 +86,7 @@ public class ClientListFragment extends ListFragment {
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
+            mListener.onFragmentInteraction(mClients.get(position).getId());
         }
     }
 

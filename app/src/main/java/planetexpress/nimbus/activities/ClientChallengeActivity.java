@@ -49,6 +49,7 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
 
     //TODO get this value from the user
     private String mClientID = "david";
+    private String mClientParseID;
     private ChallengeListFragment mFragment;
 
     @Override
@@ -74,7 +75,6 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
         PushService.subscribe(this, "ChallengeCreated", ClientChallengeActivity.class);
 
         //TODO setup clientID / jawbone interaction first, as a sort of FTU-style popup?
-        mFragment = ChallengeListFragment.newInstance(mClientID);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ClientChallengeActivity.this);
         accessToken = preferences.getString(UpPlatformSdkConstants.UP_PLATFORM_ACCESS_TOKEN, "");
@@ -83,7 +83,7 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
         if (accessToken.isEmpty()) {
             //TODO list is already "hidden" b/c we haven't added the fragment yet... will hold off on that until we have the client name & jawbone data
         } else {
-            getFragmentManager().beginTransaction().replace(R.id.container, mFragment).commit();
+            // hrmpphh
         }
     }
 
@@ -174,6 +174,26 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     mClientID = input.getText().toString();
+                    MindbodyRepository repo = new MindbodyRepository(ClientChallengeActivity.this);
+                    repo.getAllClients(new MindbodyRepository.ClientDataListener() {
+                        @Override
+                        public void onData(ArrayList<Client> result) {
+                            for(Client client : result){
+                                if(client.getName().equals(mClientID)){
+                                    mClientParseID = client.getId();
+                                }
+                            }
+                            if(mClientParseID != null) {
+                                mFragment = ChallengeListFragment.newInstance(mClientParseID);
+                                getFragmentManager().beginTransaction().replace(R.id.container, mFragment).commit();
+                            }
+                        }
+
+                        @Override
+                        public void onError() {
+
+                        }
+                    });
                     //TODO maybe *now* we can show the fragment?
                     // donno how to wait on Jawbone finishing ....
                 }
