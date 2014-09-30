@@ -79,11 +79,9 @@ public class MindbodyRepository {
 //        });
 //    }
 
-    public int getJawboneSteps(){
+    public int getJawboneStepsInPastDay(){
         //TODO
-            // get # steps
-
-
+            // get # steps ! return as int!
         return 0;
     }
 }

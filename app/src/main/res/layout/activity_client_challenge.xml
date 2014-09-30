@@ -4,25 +4,8 @@
     android:layout_height="match_parent"
     tools:context="planetexpress.nimbus.activities.ClientChallengeActivity">
 
-    <!--- todo move to actionbar!@ -->
-    <Button
-        android:id="@+id/authorizeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Connect To Jawbone"
-        android:layout_margin="10dp"/>
-    <Button
-        android:id="@+id/setUserName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Set Username"
-        android:layout_margin="10dp"/>
-
     <FrameLayout
         android:id="@+id/container"
-        android:layout_below="@id/authorizeButton"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 

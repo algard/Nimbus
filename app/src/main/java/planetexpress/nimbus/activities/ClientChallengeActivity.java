@@ -12,8 +12,6 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -74,18 +72,18 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
 
         //TODO setup clientID / jawbone interaction first, as a sort of FTU-style popup?
         mFragment = ChallengeListFragment.newInstance(mClientID);
-        getFragmentManager().beginTransaction().replace(R.id.container, mFragment).commit();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ClientChallengeActivity.this);
         accessToken = preferences.getString(UpPlatformSdkConstants.UP_PLATFORM_ACCESS_TOKEN, "");
         refreshToken = preferences.getString(UpPlatformSdkConstants.UP_PLATFORM_REFRESH_TOKEN, "");
 
         if (accessToken.isEmpty()) {
-            //TODO: David hide list
+            //TODO list is already "hidden" b/c we haven't added the fragment yet... will hold off on that until we have the client name & jawbone data
         } else {
-            //oAuthAuthorizeButton.setVisibility(View.GONE);
+            getFragmentManager().beginTransaction().replace(R.id.container, mFragment).commit();
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == UpPlatformSdkConstants.JAWBONE_AUTHORIZE_REQUEST_CODE && resultCode == RESULT_OK) {
@@ -163,7 +161,7 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
             // Set up the input
             final EditText input = new EditText(this);
             // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            input.setInputType(InputType.TYPE_CLASS_TEXT);
             builder.setView(input);
 
             // Set up the buttons
@@ -171,6 +169,8 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     mClientID = input.getText().toString();
+                    //TODO maybe *now* we can show the fragment?
+                    // donno how to wait on Jawbone finishing ....
                 }
             });
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
