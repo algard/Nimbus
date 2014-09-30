@@ -41,7 +41,7 @@ public class ClientsInChallenge {
         ArrayList<ParseObject> result = new ArrayList<>();
         for(Client client : clients){
             ParseObject object =  new ParseObject(PARSE_CLASS);
-            object.put(PARSE_CLIENT_ID, client.getId());
+            object.put(PARSE_CLIENT_ID, client.getName());
             object.put(PARSE_COMPLETED, false);
             object.put(PARSE_ACCEPTED_CHALLENGE, false);
             object.put(PARSE_CHALLENGE_ID, challengeID);
