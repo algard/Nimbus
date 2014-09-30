@@ -99,7 +99,7 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
 
         if (!accessToken.isEmpty()) {
             ApiManager.getRequestInterceptor().setAccessToken(accessToken);
-            //pullStepData();
+            pullStepData();
         }
     }
 
@@ -134,7 +134,7 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
                 editor.putString(UpPlatformSdkConstants.UP_PLATFORM_REFRESH_TOKEN, result.refresh_token);
                 editor.commit();
 
-                //pullStepData();
+                pullStepData();
 
                 Log.e(TAG, "accessToken:" + result.access_token);
             } else {
@@ -200,6 +200,7 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
                             if(mClientParseID != null) {
                                 mFragment = ChallengeListFragment.newInstance(mClientParseID);
                                 getFragmentManager().beginTransaction().replace(R.id.container, mFragment).commit();
+                                pullStepData();
                             }
                         }
 
@@ -244,9 +245,13 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
     }
 
     private void pullStepData() {
-        ArrayList<Challenge> challenges = mFragment.getUserChallenges();
-        for (Challenge challenge : challenges) {
-            pullStepData(Integer.valueOf(challenge.getId()), challenge.getStartDate(), challenge.getEndDate());
+        if (mFragment != null) {
+            ArrayList<Challenge> challenges = mFragment.getUserChallenges();
+            if (challenges != null) {
+                for (Challenge challenge : challenges) {
+                    pullStepData(Integer.valueOf(challenge.getId()), challenge.getStartDate(), challenge.getEndDate());
+                }
+            }
         }
     }
 

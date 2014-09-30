@@ -16,6 +16,7 @@ import butterknife.InjectView;
 import planetexpress.nimbus.Challenge;
 import planetexpress.nimbus.MindbodyRepository;
 import planetexpress.nimbus.R;
+import planetexpress.nimbus.activities.ClientChallengeActivity;
 import planetexpress.nimbus.adapters.ChallengeListAdapter;
 
 /**
@@ -53,8 +54,6 @@ public class ChallengeListFragment extends ListFragment {
         boolean isClientMode = mClientName != null;
         mChallengeListAdapter = new ChallengeListAdapter(getActivity(), android.R.id.text1, mUserChallenges, isClientMode, mClientName);
         setListAdapter(mChallengeListAdapter);
-
-
 
         getChallenges();
     }
