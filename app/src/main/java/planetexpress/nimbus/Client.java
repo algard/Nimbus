@@ -5,7 +5,7 @@ import com.parse.ParseObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Client  {
+public class Client {
     public static final String PARSE_CLASS = "Client";
     public static final String PARSE_NAME = "Name";
     public static final String PARSE_ID = "objectId";
@@ -14,7 +14,6 @@ public class Client  {
     private ArrayList<Challenge> achievements;
     private ArrayList<Challenge> challenges;
 
-
     public String getName() {
         return mName;
     }
@@ -22,7 +21,6 @@ public class Client  {
     public void setName(String mName) {
         this.mName = mName;
     }
-
 
     public String getId(){
         return mId;

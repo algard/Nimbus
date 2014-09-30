@@ -12,8 +12,8 @@ public class ChallengeRosterActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_roster);
+        getActionBar().setTitle("Challenge Roster");
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
