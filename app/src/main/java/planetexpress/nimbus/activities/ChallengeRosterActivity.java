@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -64,6 +65,10 @@ public class ChallengeRosterActivity extends Activity {
                 }
                 numberAccepted.setText(accepted + " Participating");
                 numberPending.setText(result.size()-accepted + " Pending");
+                ArrayAdapter<String> participantAdapter = new ArrayAdapter<String>(ChallengeRosterActivity.this, android.R.layout.simple_list_item_1, nameArrayList);
+                ArrayAdapter<String> pendingAdapter = new ArrayAdapter<String>(ChallengeRosterActivity.this, android.R.layout.simple_list_item_1, pendingArrayList);
+                participantsList.setAdapter(participantAdapter);
+                pendingList.setAdapter(pendingAdapter);
             }
 
             @Override
