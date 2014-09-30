@@ -62,20 +62,6 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
         authScope  = new ArrayList<UpPlatformSdkConstants.UpPlatformAuthScope>();
         authScope.add(UpPlatformSdkConstants.UpPlatformAuthScope.ALL);
 
-        MindbodyRepository rep = new MindbodyRepository(this);
-
-        rep.getAllClients(new MindbodyRepository.ClientDataListener() {
-            @Override
-            public void onData(ArrayList<Client> result) {
-                Log.d("TAG", "Size: "+result.size());
-            }
-
-            @Override
-            public void onError() {
-
-            }
-        });
-
         //TODO Matt - this button was hidden, moved to the actionbar, handled in OnOptionItemClicked() down below
 //        Button oAuthAuthorizeButton = (Button) findViewById(R.id.authorizeButton);
 //        oAuthAuthorizeButton.setOnClickListener(new View.OnClickListener() {
