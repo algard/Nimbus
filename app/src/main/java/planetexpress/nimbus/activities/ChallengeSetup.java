@@ -87,6 +87,8 @@ public class ChallengeSetup extends Activity implements ChallengeListFragment.On
 
     private void onAddButtonPressed() {
         fabButton.setVisibility(View.GONE);
+        ongoingTab.setActivated(false);
+        addNewTab.setActivated(true);
         Fragment detailsFragment = new ChallengeDetailsFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, detailsFragment);
