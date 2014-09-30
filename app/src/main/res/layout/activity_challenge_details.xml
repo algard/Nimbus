@@ -16,7 +16,7 @@
         android:orientation="horizontal">
         <ImageView
             android:contentDescription="time!"
-            android:src="@drawable/description_icon"
+            android:src="@drawable/title_icon"
             android:layout_width="25dp"
             android:layout_height="25dp"/>
         <TextView
