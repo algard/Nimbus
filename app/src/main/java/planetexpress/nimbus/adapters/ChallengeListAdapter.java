@@ -67,16 +67,17 @@ public class ChallengeListAdapter extends ArrayAdapter<Challenge> {
                 @Override
                 public void onClick(View view) {
                     ChallengeDetailsDialog dialog = new ChallengeDetailsDialog(getItem(position), headerImage.getDrawable());
-                    dialog.show(((Activity)mContext).getFragmentManager(), "Info");
+                    dialog.show(((Activity) mContext).getFragmentManager(), "Info");
                 }
             });
 
-            Button acceptButton = (Button)convertView.findViewById(R.id.accept_button);
+            final Button acceptButton = (Button)convertView.findViewById(R.id.accept_button);
             acceptButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     final MindbodyRepository repo = new MindbodyRepository(getContext());
                     repo.acceptChallenge(clientName, challengeName.getText().toString());
+                    acceptButton.setVisibility(View.GONE);
                 }
             });
 
