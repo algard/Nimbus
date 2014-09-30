@@ -85,6 +85,7 @@ public class ChallengeListFragment extends ListFragment {
                                 }
                             }
                             mUserChallenges.addAll(filtered);
+                            mChallengeListAdapter.notifyDataSetChanged();
                         }
 
                         @Override

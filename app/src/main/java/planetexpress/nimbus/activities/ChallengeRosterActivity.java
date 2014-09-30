@@ -2,6 +2,7 @@ package planetexpress.nimbus.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import planetexpress.nimbus.Client;
 import planetexpress.nimbus.MindbodyRepository;
 import planetexpress.nimbus.R;
+import planetexpress.nimbus.data.ClientsInChallenge;
 
 public class ChallengeRosterActivity extends Activity {
 
@@ -31,10 +33,10 @@ public class ChallengeRosterActivity extends Activity {
 
         getActionBar().setTitle(mChallengeName+" Roster");
         mbRepo =  new MindbodyRepository(this);
-        mbRepo.getClientsInChallenge(mChallengeName, new MindbodyRepository.ClientDataListener() {
+        mbRepo.getClientsInChallenge(mChallengeName, new MindbodyRepository.ClientsInChallengeListener() {
             @Override
-            public void onData(ArrayList<Client> result) {
-                
+            public void onData(ArrayList<ClientsInChallenge> result) {
+                Log.d("TAG", "Size: "+result.size());
             }
 
             @Override

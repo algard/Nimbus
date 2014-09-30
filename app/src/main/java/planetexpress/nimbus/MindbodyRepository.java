@@ -109,14 +109,14 @@ public class MindbodyRepository {
         }
     }
 
-    public void getClientsInChallenge(String challengeName, final ClientDataListener listener){
-        ParseQuery<ParseObject> query = ParseQuery.getQuery(Challenge.PARSE_CLASS);
-        query.whereEqualTo(Challenge.PARSE_NAME, challengeName);
+    public void getClientsInChallenge(String challengeName, final ClientsInChallengeListener listener){
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(ClientsInChallenge.PARSE_CLASS);
+        query.whereEqualTo(ClientsInChallenge.PARSE_CHALLENGE_ID, challengeName);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {
                 if (e == null) {
-                    // listener.onData(Challenge.fromParseObjects(parseObjects));
+                    listener.onData(ClientsInChallenge.fromParseObjects(parseObjects));
                 } else {
                     // something went wrong
                 }
