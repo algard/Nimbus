@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import planetexpress.nimbus.Client;
+import planetexpress.nimbus.MindbodyRepository;
 import planetexpress.nimbus.R;
 import planetexpress.nimbus.WireTaskCallback;
 import planetexpress.nimbus.dialogfragments.SelectClientsDialog;
@@ -65,6 +66,8 @@ public class ChallengeDetailsFragment extends Fragment {
     private ArrayList<String> mEndTimes= new ArrayList<String>();
     private ArrayList<String> mRewards= new ArrayList<String>();
 
+    private MindbodyRepository rep = new MindbodyRepository(getActivity());
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -97,13 +100,13 @@ public class ChallengeDetailsFragment extends Fragment {
                             //Create challenge object here -- pass forward it's ID
                             data = new JSONObject("{\"action\": \"planetexpress.nimbus.CREATE_CHALLENGE\"," +
                                     " \"name\": \"" + createChallenge.get("Name")
-                                    +"\", \"objectId\": \"1wue2MwxEQ\" }");
+                                    + "\", \"objectId\": \"1wue2MwxEQ\" }");
 //                                    +"\", \"objectId\": \"" + createChallenge.getObjectId() + "\" }");
 
                             push.setChannel("ChallengeCreated");
                             push.setData(data);
                             push.setMessage("You have been challenged, can you conquer today's \'"
-                                            + createChallenge.getString("Name") + "' challenge!?");
+                                    + createChallenge.getString("Name") + "' challenge!?");
                             push.sendInBackground(new SendCallback() {
                                 @Override
                                 public void done(ParseException e) {
