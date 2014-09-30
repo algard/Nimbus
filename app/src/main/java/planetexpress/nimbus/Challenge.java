@@ -96,6 +96,14 @@ public class Challenge {
         this.currentSteps = currentSteps;
     }
 
+    public int getCurrentSteps() {
+        return currentSteps;
+    }
+
+    public int getCurrentCalories() {
+        return currentCalories;
+    }
+
     public void setCurrentCalories(int currentCalories) {
         this.currentCalories = currentCalories;
     }

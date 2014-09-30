@@ -1,5 +1,6 @@
 package planetexpress.nimbus.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.media.Image;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import java.util.List;
 import planetexpress.nimbus.Challenge;
 import planetexpress.nimbus.MindbodyRepository;
 import planetexpress.nimbus.R;
+import planetexpress.nimbus.dialogfragments.ChallengeDetailsDialog;
+import planetexpress.nimbus.fragments.ChallengeListFragment;
 
 public class ChallengeListAdapter extends ArrayAdapter<Challenge> {
     private final List<Challenge> mItems;
@@ -33,7 +36,7 @@ public class ChallengeListAdapter extends ArrayAdapter<Challenge> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final Challenge challenge = mItems.get(position);
 
         if (convertView == null) {
@@ -43,7 +46,7 @@ public class ChallengeListAdapter extends ArrayAdapter<Challenge> {
         final TextView challengeName = (TextView)convertView.findViewById(R.id.challenge_title);
         TextView challengeTime = (TextView)convertView.findViewById(R.id.time_remaining);
 
-        ImageView headerImage = (ImageView)convertView.findViewById(R.id.card_header_bg);
+        final ImageView headerImage = (ImageView)convertView.findViewById(R.id.card_header_bg);
         if(position % 3 == 0) {
             headerImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.card_1));
         }else if (position % 3 == 1){
@@ -58,7 +61,15 @@ public class ChallengeListAdapter extends ArrayAdapter<Challenge> {
 
             (convertView.findViewById(R.id.accept_button)).setVisibility(View.VISIBLE);
             (convertView.findViewById(R.id.share_button)).setVisibility(View.VISIBLE);
-            (convertView.findViewById(R.id.more_info_button)).setVisibility(View.VISIBLE);
+            Button moreInfo = (Button) convertView.findViewById(R.id.more_info_button);
+            moreInfo.setVisibility(View.VISIBLE);
+            moreInfo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ChallengeDetailsDialog dialog = new ChallengeDetailsDialog(getItem(position), headerImage.getDrawable());
+                    dialog.show(((Activity)mContext).getFragmentManager(), "Info");
+                }
+            });
 
             Button acceptButton = (Button)convertView.findViewById(R.id.accept_button);
             acceptButton.setOnClickListener(new View.OnClickListener() {
