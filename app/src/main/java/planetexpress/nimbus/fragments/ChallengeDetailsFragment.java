@@ -148,8 +148,10 @@ public class ChallengeDetailsFragment extends Fragment {
     }
 
     private void setupSpinners() {
-        mChallengeTypeOptions.add("Weekly Steps");
-        mChallengeTypeOptions.add("Monthly Steps");
+        mChallengeTypeOptions.add("Sleep");
+        mChallengeTypeOptions.add("Steps");
+        mChallengeTypeOptions.add("Class Attendance");
+        mChallengeTypeOptions.add("Nutrition");
         mChallengeTypeArrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_spinner_item, mChallengeTypeOptions);
         mChallengeTypeArrayAdapter.setDropDownViewResource(R.layout.dropdown_item);
         typeOfChallengeSpinner.setAdapter(mChallengeTypeArrayAdapter);
@@ -186,8 +188,8 @@ public class ChallengeDetailsFragment extends Fragment {
         endTimeSpinner.setAdapter(mEndTimesArrayAdapter);
 
         mRewards.add("Free Class");
-        mRewards.add("Free Friend Pass");
-        mRewards.add("Free T-Shirt");
+        mRewards.add("Friend Pass");
+        mRewards.add("T-Shirt");
         mRewardsArrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_spinner_item, mRewards);
         mRewardsArrayAdapter.setDropDownViewResource(R.layout.dropdown_item);
         rewardSpinner.setAdapter(mRewardsArrayAdapter);
