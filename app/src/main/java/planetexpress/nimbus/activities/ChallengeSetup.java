@@ -61,6 +61,7 @@ public class ChallengeSetup extends Activity implements ChallengeListFragment.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_setup);
+        getActionBar().setHomeButtonEnabled(true);
         ButterKnife.inject(this);
         ParseAnalytics.trackAppOpened(getIntent());
         ongoingTab.setActivated(true);
