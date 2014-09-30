@@ -109,7 +109,7 @@ public class MindbodyRepository {
         }
     }
 
-    public void getClientsInChallenge(String challengeName, final ClientsInChallengeListener listener){
+    public void getClientsInChallenge(String challengeName, final ClientDataListener listener){
         ParseQuery<ParseObject> query = ParseQuery.getQuery(Challenge.PARSE_CLASS);
         query.whereEqualTo(Challenge.PARSE_NAME, challengeName);
         query.findInBackground(new FindCallback<ParseObject>() {
