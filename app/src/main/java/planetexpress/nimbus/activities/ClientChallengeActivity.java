@@ -62,7 +62,7 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
     private ChallengeListFragment mFragment;
 
     public class StepData {
-        int id;
+        String id;
         int totalSteps;
         int totalCalories;
     }
@@ -252,13 +252,13 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
             ArrayList<Challenge> challenges = mFragment.getUserChallenges();
             if (challenges != null) {
                 for (Challenge challenge : challenges) {
-                    pullStepData(Integer.valueOf(challenge.getId()), challenge.getStartDate(), challenge.getEndDate());
+                    pullStepData(challenge.getId(), challenge.getStartDate(), challenge.getEndDate());
                 }
             }
         }
     }
 
-    private void pullStepData(final int id, Calendar startDate, Calendar endDate) {
+    private void pullStepData(final String id, Calendar startDate, Calendar endDate) {
         ApiManager.getRestApiInterface().getMoveEventsList(UpPlatformSdkConstants.API_VERSION_STRING, getMoveEventsListRequestParams(startDate, endDate), new Callback<Object>() {
             @Override
             public void success(Object o, Response response) {
@@ -281,7 +281,7 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
         SimpleDateFormat date = new SimpleDateFormat("yyyymmdd");
 
         //uncomment to add as needed parameters
-        queryHashMap.put("date", Integer.valueOf(date.format(startDate)));
+        queryHashMap.put("date", Integer.valueOf(date.format(startDate.getTime())));
 //      queryHashMap.put("page_token", "<insert-page-token>");
         queryHashMap.put("start_time", startDate.get(Calendar.MILLISECOND));
         queryHashMap.put("end_time", endDate.get(Calendar.MILLISECOND));
@@ -290,7 +290,7 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
         return queryHashMap;
     }
 
-    private void processStepData(int id, Object o) {
+    private void processStepData(String id, Object o) {
         int totalSteps = 0;
         int totalCalories = 0;
 

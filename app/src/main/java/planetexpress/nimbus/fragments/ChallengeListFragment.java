@@ -170,18 +170,18 @@ public class ChallengeListFragment extends ListFragment {
         return mUserChallenges;
     }
 
-    public void setSteps(int id, int steps) {
+    public void setSteps(String id, int steps) {
         for (Challenge challenge : mUserChallenges) {
-            if (Integer.valueOf(challenge.getId()) == id) {
+            if (challenge.getId() == id) {
                 challenge.setCurrentSteps(steps);
                 break;
             }
         }
     }
 
-    public void setCalories(int id, int calories) {
+    public void setCalories(String id, int calories) {
         for (Challenge challenge : mUserChallenges) {
-            if (Integer.valueOf(challenge.getId()) == id) {
+            if (challenge.getId() == id) {
                 challenge.setCurrentCalories(calories);
                 break;
             }
