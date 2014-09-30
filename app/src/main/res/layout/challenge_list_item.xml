@@ -7,12 +7,14 @@
     android:layout_gravity="fill_horizontal"
     android:background="@color/soft_white"
     android:padding="20dp"
+    android:focusable="false"
     android:layout_margin="10dp"
     android:layout_marginBottom="25dp"
     card_view:cardCornerRadius="15dp">
 
     <LinearLayout
         android:orientation="vertical"
+        android:focusable="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -20,6 +22,7 @@
             android:id="@+id/challenge_title"
             android:textStyle="bold"
             android:textSize="22sp"
+            android:focusable="false"
             android:layout_marginTop="50dp"
             android:text="Challenge!"
             android:layout_width="wrap_content"
@@ -27,29 +30,34 @@
 
         <View
             android:layout_width="fill_parent"
+            android:focusable="false"
             android:layout_height="1dp"
             android:background="@color/background"/>
 
         <TextView
             android:id="@+id/time_remaining"
             android:textSize="16sp"
+            android:focusable="false"
             android:text="5 days Left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_marginTop="20dp"
+            android:focusable="false"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
             <Button
                 android:layout_marginRight="35dp"
                 android:id="@+id/roster_button"
+                android:focusable="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Roster"/>
 
             <Button
                 android:id="@+id/edit_button"
+                android:focusable="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Edit"/>
@@ -58,11 +66,13 @@
                 android:layout_marginRight="35dp"
                 android:id="@+id/share_button"
                 android:layout_width="wrap_content"
+                android:focusable="false"
                 android:layout_height="wrap_content"
                 android:text="Share"/>
 
             <Button
                 android:id="@+id/more_info_button"
+                android:focusable="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="More Info"/>

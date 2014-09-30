@@ -24,7 +24,6 @@ public class ChallengeListAdapter extends ArrayAdapter<Challenge> {
         this.mIsClientMode = isClientMode;
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final Challenge challenge = mItems.get(position);
@@ -40,9 +39,14 @@ public class ChallengeListAdapter extends ArrayAdapter<Challenge> {
             (convertView.findViewById(R.id.roster_button)).setVisibility(View.GONE);
             (convertView.findViewById(R.id.edit_button)).setVisibility(View.GONE);
 
-            (convertView.findViewById(R.id.roster_button)).setVisibility(View.GONE);
-            (convertView.findViewById(R.id.edit_button)).setVisibility(View.GONE);
+            (convertView.findViewById(R.id.share_button)).setVisibility(View.VISIBLE);
+            (convertView.findViewById(R.id.more_info_button)).setVisibility(View.VISIBLE);
+        }else{
+            (convertView.findViewById(R.id.roster_button)).setVisibility(View.VISIBLE);
+            (convertView.findViewById(R.id.edit_button)).setVisibility(View.VISIBLE);
 
+            (convertView.findViewById(R.id.share_button)).setVisibility(View.GONE);
+            (convertView.findViewById(R.id.more_info_button)).setVisibility(View.GONE);
         }
 
         challengeName.setText(challenge.getName());

@@ -79,7 +79,11 @@ public class MindbodyRepository {
         });
     }
 
-    public void getClientForID(){
+    public int getJawboneSteps(){
+        //TODO
+            // get # steps
 
+
+        return 0;
     }
 }
