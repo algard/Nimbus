@@ -65,7 +65,7 @@
         </activity>
         <activity
             android:name=".activities.StartActivity"
-            android:label="@string/title_activity_start"
+            android:label="Nimbus!"
             android:windowSoftInputMode="adjustResize|stateHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

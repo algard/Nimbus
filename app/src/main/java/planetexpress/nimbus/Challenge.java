@@ -111,7 +111,7 @@ public class Challenge {
     public static Challenge fromParseObject(ParseObject parseChallenge) {
         Challenge challenge = new Challenge();
         challenge.setName(parseChallenge.getString(Challenge.PARSE_NAME));
-        challenge.setId(parseChallenge.getString(Challenge.PARSE_ID));
+        challenge.setId(parseChallenge.getObjectId());
         challenge.setDescription(parseChallenge.getString(Challenge.PARSE_DESCRIPTION));
         challenge.setEndTime("9/30 9:00AM");
         Calendar date = Calendar.getInstance();

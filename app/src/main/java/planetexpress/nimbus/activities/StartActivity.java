@@ -52,6 +52,14 @@ public class StartActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(getIntent() != null){
+            if(getIntent().getIntExtra("WIGGITY",0) == 1){
+                Intent newActivity = new Intent(this, ChallengeSetup.class);
+                startActivity(newActivity);
+            }
+        }
+
         setContentView(R.layout.activity_start);
 
         mStaffSideButton = (Button) findViewById(R.id.staff_side_button);
