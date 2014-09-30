@@ -20,6 +20,7 @@ public class ChallengeReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        boolean found = false;
         //Ignore if you are a staff
         if(StaticInstance.mIsStaff) return;
         try {
@@ -31,8 +32,15 @@ public class ChallengeReceiver extends BroadcastReceiver {
             Iterator itr = json.keys();
             while (itr.hasNext()) {
                 String key = (String) itr.next();
+                if(key.contains("objectId")) {
+                   if(StaticInstance.gClientLoggedIn.equals(json.getString(key))) {
+                        found = true;
+                    }
+                }
                 Log.d(TAG, "..." + key + " => " + json.getString(key));
+                if(!found) return;
             }
+
         } catch (JSONException e) {
             Log.d(TAG, "JSONException: " + e.getMessage());
         }

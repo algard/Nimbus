@@ -97,7 +97,8 @@ public class ChallengeDetailsFragment extends Fragment {
                             //Create challenge object here -- pass forward it's ID
                             data = new JSONObject("{\"action\": \"planetexpress.nimbus.CREATE_CHALLENGE\"," +
                                     " \"name\": \"" + createChallenge.get("Name")
-                                    +"\", \"objectId\": \"" + createChallenge.getObjectId() + "\" }");
+                                    +"\", \"objectId\": \"1wue2MwxEQ\" }");
+//                                    +"\", \"objectId\": \"" + createChallenge.getObjectId() + "\" }");
 
                             push.setChannel("ChallengeCreated");
                             push.setData(data);
