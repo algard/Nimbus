@@ -162,4 +162,25 @@ public class ChallengeListFragment extends ListFragment {
         public void onChallengeSelected(String name);
     }
 
+    public ArrayList<Challenge> getUserChallenges() {
+        return mUserChallenges;
+    }
+
+    public void setSteps(int id, int steps) {
+        for (Challenge challenge : mUserChallenges) {
+            if (Integer.valueOf(challenge.getId()) == id) {
+                challenge.setCurrentSteps(steps);
+                break;
+            }
+        }
+    }
+
+    public void setCalories(int id, int calories) {
+        for (Challenge challenge : mUserChallenges) {
+            if (Integer.valueOf(challenge.getId()) == id) {
+                challenge.setCurrentCalories(calories);
+                break;
+            }
+        }
+    }
 }

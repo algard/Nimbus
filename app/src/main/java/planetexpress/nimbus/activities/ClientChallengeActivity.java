@@ -33,6 +33,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
+import planetexpress.nimbus.Challenge;
 import planetexpress.nimbus.Client;
 import planetexpress.nimbus.MindbodyRepository;
 import planetexpress.nimbus.R;
@@ -234,7 +235,19 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
     }
 
     private void refreshViews() {
-        
+        if (mFragment != null) {
+            for (StepData steps : stepData) {
+                mFragment.setSteps(steps.id, steps.totalSteps);
+                mFragment.setCalories(steps.id, steps.totalCalories);
+            }
+        }
+    }
+
+    private void pullStepData() {
+        ArrayList<Challenge> challenges = mFragment.getUserChallenges();
+        for (Challenge challenge : challenges) {
+            pullStepData(Integer.valueOf(challenge.getId()), challenge.getStartDate(), challenge.getEndDate());
+        }
     }
 
     private void pullStepData(final int id, Calendar startDate, Calendar endDate) {
