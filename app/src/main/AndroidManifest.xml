@@ -13,6 +13,9 @@
     <permission
         android:name="planetexpress.nimbus.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
+
+    <uses-permission android:name="planetexpress.nimbus.permission.C2D_MESSAGE" />
+
     <!--
      To retrieve OAuth 2.0 tokens or invalidate tokens to disconnect a user. This disconnect
      option is required to comply with the Google+ Sign-In developer policies
