@@ -87,6 +87,13 @@ public class MindbodyRepository {
         });
     }
 
+    public void putNewChallengeParticipants(ArrayList<Client> clients, ParseObject challenge){
+        ArrayList<ParseObject> entries = ClientsInChallenge.toParseObjects(clients, challenge.getString(Challenge.PARSE_NAME));
+        for(ParseObject object: entries){
+            object.saveInBackground();
+        }
+    }
+
     public int getJawboneStepsInPastDay(){
         //TODO
             // get # steps ! return as int!

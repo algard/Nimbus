@@ -129,6 +129,9 @@ public class ChallengeDetailsFragment extends Fragment {
                         } catch (JSONException ex) {
                             ex.printStackTrace();
                         }
+
+                        MindbodyRepository repo = new MindbodyRepository(getActivity());
+                        repo.putNewChallengeParticipants(clientList,createChallenge);
                     }
                 });
 
