@@ -127,11 +127,11 @@ public class ChallengeSetup extends Activity implements ChallengeListFragment.On
     }
 
     @Override
-    public void onChallengeSelected(String id) {
+    public void onChallengeSelected(String name) {
         //TODO intent to ChallengeDetailsFragment ... etc
-        Toast.makeText(this, "Challenge Clicked: " + id, Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(this, "Challenge Clicked: " + name, Toast.LENGTH_SHORT).show();
         Intent rosterIntent = new Intent(this, ChallengeRosterActivity.class);
+        rosterIntent.putExtra("challenge_name", name);
         startActivity(rosterIntent);
     }
 

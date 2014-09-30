@@ -8,11 +8,24 @@ import planetexpress.nimbus.R;
 
 public class ChallengeRosterActivity extends Activity {
 
+    private String mChallengeName;
+    public static final String EXTRA_NAME = "challenge_name";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_roster);
-        getActionBar().setTitle("Challenge Roster");
+
+        if(getIntent() != null){
+            mChallengeName = getIntent().getStringExtra(EXTRA_NAME);
+        }
+        if(mChallengeName == null){
+            mChallengeName = "Challenge!";
+        }
+
+        getActionBar().setTitle(mChallengeName);
+        getActionBar().setTitle(mChallengeName+" Roster");
     }
 
     @Override
