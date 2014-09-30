@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import planetexpress.nimbus.Challenge;
+import planetexpress.nimbus.MindbodyRepository;
 import planetexpress.nimbus.R;
 
 public class ChallengeListAdapter extends ArrayAdapter<Challenge> {

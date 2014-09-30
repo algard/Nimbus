@@ -6,11 +6,13 @@ import android.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 import planetexpress.nimbus.Challenge;
 import planetexpress.nimbus.MindbodyRepository;
 import planetexpress.nimbus.R;
@@ -30,6 +32,9 @@ public class ChallengeListFragment extends ListFragment {
     public ChallengeListFragment() {
     }
 
+    @InjectView(R.id.accept_button)
+    Button acceptButton;
+
     // TODO: Rename and change types of parameters
     public static ChallengeListFragment newInstance(String clientID) {
         ChallengeListFragment fragment = new ChallengeListFragment();
@@ -42,7 +47,6 @@ public class ChallengeListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (getArguments() != null) {
             mClientName = getArguments().getString(ARG_CLIENT_ID);
         }
@@ -51,6 +55,8 @@ public class ChallengeListFragment extends ListFragment {
         boolean isClientMode = mClientName != null;
         mChallengeListAdapter = new ChallengeListAdapter(getActivity(), android.R.id.text1, mUserChallenges, isClientMode);
         setListAdapter(mChallengeListAdapter);
+
+
 
         getChallenges();
     }
@@ -62,6 +68,14 @@ public class ChallengeListFragment extends ListFragment {
         View view = inflater.inflate(R.layout.challenge_list_fragment, null);
         //HERE BE INJECTION!!!
         ButterKnife.inject(this, view);
+        final MindbodyRepository repo = new MindbodyRepository(getActivity());
+
+        acceptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
 
         return view;
     }
@@ -77,9 +91,9 @@ public class ChallengeListFragment extends ListFragment {
                         @Override
                         public void onData(ArrayList<Challenge> result) {
                             ArrayList<Challenge> filtered = new ArrayList<Challenge>();
-                            for(Challenge chlg : result){
-                                for(String challengeName : challengeNames){
-                                    if(challengeName.equals(chlg.getName())){
+                            for (Challenge chlg : result) {
+                                for (String challengeName : challengeNames) {
+                                    if (challengeName.equals(chlg.getName())) {
                                         filtered.add(chlg);
                                     }
                                 }
