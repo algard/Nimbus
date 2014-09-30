@@ -101,6 +101,8 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
             ApiManager.getRequestInterceptor().setAccessToken(accessToken);
             pullStepData();
         }
+
+        stepData = new ArrayList<StepData>();
     }
 
     @Override
@@ -133,6 +135,8 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
                 editor.putString(UpPlatformSdkConstants.UP_PLATFORM_ACCESS_TOKEN, result.access_token);
                 editor.putString(UpPlatformSdkConstants.UP_PLATFORM_REFRESH_TOKEN, result.refresh_token);
                 editor.commit();
+
+                ApiManager.getRequestInterceptor().setAccessToken(result.access_token);
 
                 pullStepData();
 
@@ -281,10 +285,10 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
         SimpleDateFormat date = new SimpleDateFormat("yyyymmdd");
 
         //uncomment to add as needed parameters
-        queryHashMap.put("date", Integer.valueOf(date.format(startDate.getTime())));
+//        queryHashMap.put("date", Integer.valueOf(date.format(startDate.getTime())));
 //      queryHashMap.put("page_token", "<insert-page-token>");
-        queryHashMap.put("start_time", startDate.get(Calendar.MILLISECOND));
-        queryHashMap.put("end_time", endDate.get(Calendar.MILLISECOND));
+//        queryHashMap.put("start_time", startDate.getTimeInMillis());
+//        queryHashMap.put("end_time", endDate.getTimeInMillis());
 //      queryHashMap.put("updated_after", "<insert-time>");
 
         return queryHashMap;
