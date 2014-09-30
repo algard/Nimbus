@@ -185,13 +185,23 @@
                 android:layout_weight="1"
                 android:spinnerMode="dropdown"/>
         </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:contentDescription="time!"
+            android:src="@drawable/reward_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"/>
         <TextView
             android:textSize="24dp"
-            android:paddingLeft="30dp"
+            android:paddingLeft="5dp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reward"/>
+    </LinearLayout>
         <Spinner
             android:paddingLeft="30dp"
             android:layout_width="wrap_content"
