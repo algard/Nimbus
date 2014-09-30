@@ -74,6 +74,14 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activities.ChallengeRosterActivity"
+            android:label="@string/title_activity_challenge_roster"
+            android:parentActivityName="planetexpress.nimbus.activities.ChallengeSetup" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="planetexpress.nimbus.activities.ChallengeSetup" />
+        </activity>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
