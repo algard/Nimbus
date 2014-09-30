@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +51,8 @@ public class ChallengeDetailsFragment extends Fragment {
     @InjectView(R.id.endTimeSpinner) protected Spinner endTimeSpinner;
     @InjectView(R.id.startChallengeButton) protected Button startChallenge;
     @InjectView(R.id.numberOfParticipants) TextView numberParticipating;
+    @InjectView(R.id.challengeDescription) EditText descriptionField;
+    @InjectView(R.id.challengeTitleField) EditText challengeTitle;
 
 
     private ArrayAdapter<String> mChallengeTypeArrayAdapter;
@@ -73,6 +76,9 @@ public class ChallengeDetailsFragment extends Fragment {
 
     private MindbodyRepository rep = new MindbodyRepository(getActivity());
 
+    private ParseObject createChallenge = new ParseObject("Challenge");
+    private OnFragmentInteractionListener mListener;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -91,9 +97,10 @@ public class ChallengeDetailsFragment extends Fragment {
         startChallenge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final ParseObject createChallenge = new ParseObject("Challenge");
-                createChallenge.put("Name", "Sean Plott");
-                createChallenge.put("Description", "This is just a test");
+                createChallenge.put("Name", challengeTitle.getText().toString());
+                createChallenge.put("Description", descriptionField.getText().toString());
+                createChallenge.put("Time", startDateSpinner.getSelectedItem().toString());
+                createChallenge.put("endTime", endDateSpinner.getSelectedItem().toString());
                 //Create new challenge
                 createChallenge.saveInBackground(new SaveCallback() {
                     @Override
@@ -125,7 +132,7 @@ public class ChallengeDetailsFragment extends Fragment {
                     }
                 });
 
-
+                mListener.onStartChallenge();
             }
         });
         return rootView;
@@ -209,5 +216,21 @@ public class ChallengeDetailsFragment extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (OnFragmentInteractionListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        public void onStartChallenge();
     }
 }

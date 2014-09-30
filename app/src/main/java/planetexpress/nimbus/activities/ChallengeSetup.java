@@ -35,7 +35,7 @@ import planetexpress.nimbus.fragments.ChallengeDetailsFragment;
 import planetexpress.nimbus.fragments.ChallengeListFragment;
 
 
-public class ChallengeSetup extends Activity implements ChallengeListFragment.OnFragmentInteractionListener {
+public class ChallengeSetup extends Activity implements ChallengeListFragment.OnFragmentInteractionListener, ChallengeDetailsFragment.OnFragmentInteractionListener {
     private static final String TAG = "ChallengeSetupActivity";
 
     @InjectView(R.id.fabbutton) protected Button fabButton;
@@ -47,7 +47,7 @@ public class ChallengeSetup extends Activity implements ChallengeListFragment.On
         ongoingTab.setActivated(true);
         addNewTab.setActivated(false);
         fabButton.setVisibility(View.VISIBLE);
-
+        setTitle("Ongoing Challenges");
         loadChallengeList();
     }
 
@@ -66,6 +66,7 @@ public class ChallengeSetup extends Activity implements ChallengeListFragment.On
         ParseAnalytics.trackAppOpened(getIntent());
         ongoingTab.setActivated(true);
         addNewTab.setActivated(false);
+        setTitle("Ongoing Challenges");
         fabButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                     onAddButtonPressed();
@@ -132,5 +133,10 @@ public class ChallengeSetup extends Activity implements ChallengeListFragment.On
 
         Intent rosterIntent = new Intent(this, ChallengeRosterActivity.class);
         startActivity(rosterIntent);
+    }
+
+    @Override
+    public void onStartChallenge() {
+        selectOngoing();
     }
 }
