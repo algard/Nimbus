@@ -66,6 +66,9 @@ public class ChallengeDetailsFragment extends Fragment {
     private ArrayList<String> mEndTimes= new ArrayList<String>();
     private ArrayList<String> mRewards= new ArrayList<String>();
 
+    private ArrayList<Client> clientList = new ArrayList<Client>();
+
+
     private MindbodyRepository rep = new MindbodyRepository(getActivity());
 
 
@@ -179,11 +182,21 @@ public class ChallengeDetailsFragment extends Fragment {
     }
 
     private void showAddClientsDialog(View view) {
-        ArrayList<Client> clientList = new ArrayList<>();
+        rep.getAllClients(new MindbodyRepository.ClientDataListener() {
+            @Override
+            public void onData(ArrayList<Client> result) {
+                clientList = result;
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
         SelectClientsDialog selectClientsDialog = new SelectClientsDialog(clientList, new WireTaskCallback<ArrayList<Client>>() {
             @Override
             public void onFinished(ArrayList<Client> result) {
-                //TODO: saves list of clients and updates the number selected
+
             }
         }, new Runnable() {
             @Override
