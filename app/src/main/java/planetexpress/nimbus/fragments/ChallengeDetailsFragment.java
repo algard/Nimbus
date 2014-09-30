@@ -203,6 +203,7 @@ public class ChallengeDetailsFragment extends Fragment {
                     public void onFinished(ArrayList<Client> result) {
                          int size = result.size();
                          numberParticipating.setText(size + " Participants");
+                         clientList = result;
                     }
                 }, new Runnable() {
                     @Override

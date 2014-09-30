@@ -45,6 +45,7 @@ public class ClientsInChallenge {
             object.put(PARSE_COMPLETED, false);
             object.put(PARSE_ACCEPTED_CHALLENGE, false);
             object.put(PARSE_CHALLENGE_ID, challengeID);
+            result.add(object);
         }
         return result;
     }
