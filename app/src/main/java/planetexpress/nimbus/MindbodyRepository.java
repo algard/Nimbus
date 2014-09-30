@@ -94,6 +94,21 @@ public class MindbodyRepository {
         }
     }
 
+    public void getClientsInChallenge(String challengeName){
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(Challenge.PARSE_CLASS);
+        query.whereEqualTo(Challenge.PARSE_NAME, challengeName);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> parseObjects, ParseException e) {
+                if (e == null) {
+                    listener.onData(Challenge.fromParseObjects(parseObjects));
+                } else {
+                    // something went wrong
+                }
+            }
+        });
+    }
+
     public int getJawboneStepsInPastDay(){
         //TODO
             // get # steps ! return as int!
