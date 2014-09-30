@@ -208,37 +208,46 @@
             android:layout_height="wrap_content"
             android:id="@+id/rewardSpinner"
             android:spinnerMode="dropdown"/>
-
-        <Button
-            android:layout_marginLeft="30dp"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/orange12"
-            android:padding="15dp"
-            android:id="@+id/addClientsButton"
-            android:textSize="18dp"
-            android:text="Add Clients"
-            android:layout_gravity="center_horizontal" />
+            android:layout_marginLeft="30dp"
+            android:textSize="24dp"
+            android:text="Participants"
+            android:textStyle="bold"
+            />
 
         <TextView
             android:layout_marginLeft="30dp"
             android:id="@+id/numberOfParticipants"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0 Participants"
-            android:layout_gravity="center_horizontal" />
-
+            android:text="0 Participants"/>
         <Button
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="50dp"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/orange12"
+            android:padding="15dp"
+            android:textColor="#636363"
+            android:id="@+id/addClientsButton"
+            android:textSize="14dp"
+            android:text="Add Clients" />
+
+
+        <Button
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
             android:padding="15dp"
             android:background="@color/orange03"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:id="@+id/startChallengeButton"
             android:textSize="18dp"
             android:text="Start Challenge"
-            android:layout_gravity="center_horizontal" />
+            android:textColor="#FFFFFF" />
+
+
 
 </LinearLayout>
     </ScrollView>
