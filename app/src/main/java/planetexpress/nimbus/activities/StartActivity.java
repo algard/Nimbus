@@ -18,6 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,10 +32,16 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
 import com.jawbone.upplatformsdk.utils.UpPlatformSdkConstants;
+import com.parse.GetCallback;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.PushService;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import planetexpress.nimbus.Client;
 import planetexpress.nimbus.R;
 import planetexpress.nimbus.StaticInstance;
 
@@ -63,7 +70,32 @@ public class StartActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(StartActivity.this, ClientChallengeActivity.class);
-                StaticInstance.mIsStaff = false;
+                ParseQuery<ParseObject> query = ParseQuery.getQuery("Client");
+                //TODO: For reality -- create a client based off of Name given
+                //Hard-Coded to Reece Engle
+                query.getInBackground("1wue2MwxEQ", new GetCallback<ParseObject>() {
+                    public void done(ParseObject object, ParseException e) {
+                        if (e == null) {
+                            StaticInstance.gClientLoggedIn = Client.fromParseObject(object);
+                        } else {
+                            Log.e(StartActivity.class.getSimpleName(),
+                                    "Something went wrong when retrieving hard-coded Reece client object." +
+                                    " Error:" + e.getMessage());
+                            // something went wrong
+                        }
+                    }
+
+                    @Override
+                    public void done(ParseObject parseObject, com.parse.ParseException e) {
+                        if(parseObject == null) {
+                            Log.e(StartActivity.class.getSimpleName(),
+                                    "Something went wrong when retrieving hard-coded Reece client object." +
+                                    " Error:" + e.getMessage());
+                            return;
+                        }
+                        StaticInstance.gClientLoggedIn = Client.fromParseObject(parseObject);
+                    }
+                });
                 startActivity(intent);
             }
         });

@@ -5,4 +5,5 @@ package planetexpress.nimbus;
  */
 public class StaticInstance {
     public static boolean mIsStaff = false;
+    public static Client gClientLoggedIn;
 }
