@@ -5,6 +5,8 @@ import com.parse.ParseObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import planetexpress.nimbus.Client;
+
 public class ClientsInChallenge {
     public static final String PARSE_CLASS = "ClientsInChallenge";
 
@@ -31,6 +33,19 @@ public class ClientsInChallenge {
         ArrayList<ClientsInChallenge> result = new ArrayList<>();
         for(ParseObject challenge : parseObjectList){
             result.add(ClientsInChallenge.fromParseObject(challenge));
+        }
+        return result;
+    }
+
+    public static ArrayList<ParseObject> toParseObjects(ArrayList<Client> clients, String challengeID){
+        ArrayList<ParseObject> result = new ArrayList<>();
+        for(Client client : clients){
+            ParseObject object =  new ParseObject(PARSE_CLASS);
+            object.put(PARSE_CLIENT_ID, client.getName());
+            object.put(PARSE_COMPLETED, false);
+            object.put(PARSE_ACCEPTED_CHALLENGE, false);
+            object.put(PARSE_CHALLENGE_ID, challengeID);
+            result.add(object);
         }
         return result;
     }

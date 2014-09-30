@@ -22,7 +22,7 @@ public class ChallengeListFragment extends ListFragment {
     private OnFragmentInteractionListener mListener;
 
     private static final String ARG_CLIENT_ID = "clientID";
-    private String mClientParseId;
+    private String mClientName;
 
     private ArrayList<Challenge> mUserChallenges;
     private ChallengeListAdapter mChallengeListAdapter;
@@ -44,11 +44,11 @@ public class ChallengeListFragment extends ListFragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mClientParseId = getArguments().getString(ARG_CLIENT_ID);
+            mClientName = getArguments().getString(ARG_CLIENT_ID);
         }
 
         mUserChallenges = new ArrayList<>();
-        boolean isClientMode = mClientParseId != null;
+        boolean isClientMode = mClientName != null;
         mChallengeListAdapter = new ChallengeListAdapter(getActivity(), android.R.id.text1, mUserChallenges, isClientMode);
         setListAdapter(mChallengeListAdapter);
 
@@ -68,12 +68,31 @@ public class ChallengeListFragment extends ListFragment {
 
 
     private void getChallenges(){
-        MindbodyRepository repo = new MindbodyRepository(getActivity());
-        if(mClientParseId != null) {
-            repo.getChallengesForUser(mClientParseId, new MindbodyRepository.ChallengeDataListener() {
+        final MindbodyRepository repo = new MindbodyRepository(getActivity());
+        if(mClientName != null) {
+            repo.getChallengesForUser(mClientName, new MindbodyRepository.ChallengeIDsListener() {
                 @Override
-                public void onData(ArrayList<Challenge> result) {
-                    mUserChallenges.addAll(result);
+                public void onData(final ArrayList<String> challengeNames) {
+                    repo.getAllChallenges(new MindbodyRepository.ChallengeDataListener() {
+                        @Override
+                        public void onData(ArrayList<Challenge> result) {
+                            ArrayList<Challenge> filtered = new ArrayList<Challenge>();
+                            for(Challenge chlg : result){
+                                for(String challengeName : challengeNames){
+                                    if(challengeName.equals(chlg.getName())){
+                                        filtered.add(chlg);
+                                    }
+                                }
+                            }
+                            mUserChallenges.addAll(filtered);
+                            mChallengeListAdapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onError() {
+
+                        }
+                    });
                     mChallengeListAdapter.notifyDataSetChanged();
                 }
 
@@ -124,7 +143,7 @@ public class ChallengeListFragment extends ListFragment {
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onChallengeSelected(mUserChallenges.get(position).getId());
+            mListener.onChallengeSelected(mUserChallenges.get(position).getName());
         }
     }
 
@@ -140,7 +159,7 @@ public class ChallengeListFragment extends ListFragment {
     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onChallengeSelected(String id);
+        public void onChallengeSelected(String name);
     }
 
 }

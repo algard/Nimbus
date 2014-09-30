@@ -23,8 +23,20 @@ public class MindbodyRepository {
         public void onError();
     }
 
+    public interface ChallengeIDsListener {
+        public void onData(ArrayList<String> challengeIds);
+
+        public void onError();
+    }
+
     public interface ClientDataListener {
         public void onData(ArrayList<Client> result);
+
+        public void onError();
+    }
+
+    public interface ClientsInChallengeListener {
+        public void onData(ArrayList<ClientsInChallenge> result);
 
         public void onError();
     }
@@ -52,7 +64,7 @@ public class MindbodyRepository {
     }
 
     //TODO get the list of challenges from Parse
-    public ArrayList<Challenge> getChallengesForUser(String mClientID, final ChallengeDataListener listener) {
+    public void getChallengesForUser(String mClientID, final ChallengeIDsListener listener) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(ClientsInChallenge.PARSE_CLASS);
         query.whereEqualTo(ClientsInChallenge.PARSE_CLIENT_ID, mClientID);
         query.findInBackground(new FindCallback<ParseObject>() {
@@ -61,15 +73,18 @@ public class MindbodyRepository {
                 if(e == null) {
                     ArrayList<ClientsInChallenge> clients = ClientsInChallenge.fromParseObjects(parseObjects);
 
-                    //TODO
+                    final ArrayList<String> challengeIDs = new ArrayList<String>();
+                    for(ClientsInChallenge entry : clients){
+                        challengeIDs.add(entry.ChallengeId);
+                    }
+
+                    listener.onData(challengeIDs);
                     //listener.onData();
                 }else {
                     // WELL FUCK YOU THEN
                 }
             }
         });
-
-        return new ArrayList<>();
     }
 
 //    //TODO get the list of clients from Parse
@@ -80,6 +95,28 @@ public class MindbodyRepository {
             public void done(List<ParseObject> parseObjects, ParseException e) {
                 if (e == null) {
                     listener.onData(Client.fromParseObjects(parseObjects));
+                } else {
+                    // something went wrong
+                }
+            }
+        });
+    }
+
+    public void putNewChallengeParticipants(ArrayList<Client> clients, ParseObject challenge){
+        ArrayList<ParseObject> entries = ClientsInChallenge.toParseObjects(clients, challenge.getString(Challenge.PARSE_NAME));
+        for(ParseObject object: entries){
+            object.saveInBackground();
+        }
+    }
+
+    public void getClientsInChallenge(String challengeName, final ClientsInChallengeListener listener){
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(ClientsInChallenge.PARSE_CLASS);
+        query.whereEqualTo(ClientsInChallenge.PARSE_CHALLENGE_ID, challengeName);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> parseObjects, ParseException e) {
+                if (e == null) {
+                    listener.onData(ClientsInChallenge.fromParseObjects(parseObjects));
                 } else {
                     // something went wrong
                 }

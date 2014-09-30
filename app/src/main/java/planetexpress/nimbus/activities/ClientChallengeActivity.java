@@ -193,7 +193,7 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
                         public void onData(ArrayList<Client> result) {
                             for(Client client : result){
                                 if(client.getName().equals(mClientID)){
-                                    mClientParseID = client.getId();
+                                    mClientParseID = client.getName();
                                 }
                             }
                             if(mClientParseID != null) {
