@@ -68,12 +68,30 @@ public class ChallengeListFragment extends ListFragment {
 
 
     private void getChallenges(){
-        MindbodyRepository repo = new MindbodyRepository(getActivity());
+        final MindbodyRepository repo = new MindbodyRepository(getActivity());
         if(mClientParseId != null) {
-            repo.getChallengesForUser(mClientParseId, new MindbodyRepository.ChallengeDataListener() {
+            repo.getChallengesForUser(mClientParseId, new MindbodyRepository.ChallengeIDsListener() {
                 @Override
-                public void onData(ArrayList<Challenge> result) {
-                    mUserChallenges.addAll(result);
+                public void onData(final ArrayList<String> challengeNames) {
+                    repo.getAllChallenges(new MindbodyRepository.ChallengeDataListener() {
+                        @Override
+                        public void onData(ArrayList<Challenge> result) {
+                            ArrayList<Challenge> filtered = new ArrayList<Challenge>();
+                            for(Challenge chlg : result){
+                                for(String challengeName : challengeNames){
+                                    if(challengeName.equals(chlg.getName())){
+                                        filtered.add(chlg);
+                                    }
+                                }
+                            }
+                            mUserChallenges.addAll(filtered);
+                        }
+
+                        @Override
+                        public void onError() {
+
+                        }
+                    });
                     mChallengeListAdapter.notifyDataSetChanged();
                 }
 
