@@ -63,21 +63,21 @@ public class MindbodyRepository {
         return new ArrayList<>();
     }
 
-    //TODO get the list of clients from Parse
-    public void getAllClients(final ClientDataListener listener){
-        ParseQuery<ParseObject> query = ParseQuery.getQuery(Client.PARSE_CLASS);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> parseObjects, ParseException e) {
-                if (e == null) {
-                    String bar = parseObjects.get(0).getString(Client.PARSE_NAME);
-                    listener.onData(Client.fromParseObjects(parseObjects));
-                } else {
-                    // something went wrong
-                }
-            }
-        });
-    }
+//    //TODO get the list of clients from Parse
+//    public void getAllClients(final ClientDataListener listener){
+//        ParseQuery<ParseObject> query = ParseQuery.getQuery(Client.PARSE_CLASS);
+//        query.findInBackground(new FindCallback<ParseObject>() {
+//            @Override
+//            public void done(List<ParseObject> parseObjects, ParseException e) {
+//                if (e == null) {
+//                    String bar = parseObjects.get(0).getString(Client.PARSE_NAME);
+//                    listener.onData(Client.fromParseObjects(parseObjects));
+//                } else {
+//                    // something went wrong
+//                }
+//            }
+//        });
+//    }
 
     public int getJawboneSteps(){
         //TODO
