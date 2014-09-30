@@ -5,10 +5,7 @@ import com.parse.ParseObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by david.algar on 9/27/2014.
- */
-public class Client extends ParseObject {
+public class Client  {
     public static final String PARSE_CLASS = "Client";
     public static final String PARSE_NAME = "Name";
     public static final String PARSE_ID = "objectId";
