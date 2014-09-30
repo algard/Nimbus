@@ -32,8 +32,6 @@ public class ChallengeListFragment extends ListFragment {
     public ChallengeListFragment() {
     }
 
-    @InjectView(R.id.accept_button)
-    Button acceptButton;
 
     // TODO: Rename and change types of parameters
     public static ChallengeListFragment newInstance(String clientID) {
@@ -53,7 +51,7 @@ public class ChallengeListFragment extends ListFragment {
 
         mUserChallenges = new ArrayList<>();
         boolean isClientMode = mClientName != null;
-        mChallengeListAdapter = new ChallengeListAdapter(getActivity(), android.R.id.text1, mUserChallenges, isClientMode);
+        mChallengeListAdapter = new ChallengeListAdapter(getActivity(), android.R.id.text1, mUserChallenges, isClientMode, mClientName);
         setListAdapter(mChallengeListAdapter);
 
 
@@ -68,14 +66,7 @@ public class ChallengeListFragment extends ListFragment {
         View view = inflater.inflate(R.layout.challenge_list_fragment, null);
         //HERE BE INJECTION!!!
         ButterKnife.inject(this, view);
-        final MindbodyRepository repo = new MindbodyRepository(getActivity());
 
-        acceptButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                
-            }
-        });
 
         return view;
     }
