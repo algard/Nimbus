@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -41,7 +42,28 @@ public class ChallengeDetailsFragment extends Fragment {
     @InjectView(R.id.numberOfStepsSpinner) protected Spinner numberOfStepsSpinner;
     @InjectView(R.id.rewardSpinner) protected Spinner rewardSpinner;
     @InjectView(R.id.typeOfChallengeSpinner) protected Spinner typeOfChallengeSpinner;
+    @InjectView(R.id.startDateSpinner) protected Spinner startDateSpinner;
+    @InjectView(R.id.startTimeSpinner) protected Spinner startTimeSpinner;
+    @InjectView(R.id.endDateSpinner) protected Spinner endDateSpinner;
+    @InjectView(R.id.endTimeSpinner) protected Spinner endTimeSpinner;
     @InjectView(R.id.startChallengeButton) protected Button startChallenge;
+
+
+    private ArrayAdapter<String> mChallengeTypeArrayAdapter;
+    private ArrayAdapter<String> mNumberOfStepsArrayAdapter;
+    private ArrayAdapter<String> mStartDatesArrayAdapter;
+    private ArrayAdapter<String> mStartTimesArrayAdapter;
+    private ArrayAdapter<String> mEndDatesArrayAdapter;
+    private ArrayAdapter<String> mEndTimesArrayAdapter;
+    private ArrayAdapter<String> mRewardsArrayAdapter;
+
+    private ArrayList<String> mChallengeTypeOptions= new ArrayList<String>();
+    private ArrayList<String> mNumberOfSteps= new ArrayList<String>();
+    private ArrayList<String> mStartDates= new ArrayList<String>();
+    private ArrayList<String> mStartTimes= new ArrayList<String>();
+    private ArrayList<String> mEndDates= new ArrayList<String>();
+    private ArrayList<String> mEndTimes= new ArrayList<String>();
+    private ArrayList<String> mRewards= new ArrayList<String>();
 
 
     @Override
@@ -97,8 +119,59 @@ public class ChallengeDetailsFragment extends Fragment {
 
             }
         });
-
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View v, Bundle savedInstanceState) {
+        super.onViewCreated(v, savedInstanceState);
+        setupSpinners();
+    }
+
+    private void setupSpinners() {
+        mChallengeTypeOptions.add("Weekly Steps");
+        mChallengeTypeOptions.add("Monthly Steps");
+        mChallengeTypeArrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_spinner_item, mChallengeTypeOptions);
+        mChallengeTypeArrayAdapter.setDropDownViewResource(R.layout.dropdown_item);
+        typeOfChallengeSpinner.setAdapter(mChallengeTypeArrayAdapter);
+
+
+        mNumberOfSteps.add("10,000");
+        mNumberOfSteps.add("20,000");
+        mNumberOfSteps.add("40,000");
+        mNumberOfStepsArrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_spinner_item, mNumberOfSteps);
+        mNumberOfStepsArrayAdapter.setDropDownViewResource(R.layout.dropdown_item);
+        numberOfStepsSpinner.setAdapter(mNumberOfStepsArrayAdapter);
+
+        mStartDates.add("October 1, 2014");
+        mStartDates.add("October 2, 2014");
+        mStartDates.add("October 3, 2014");
+        mStartDatesArrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_spinner_item, mStartDates);
+        mStartDatesArrayAdapter.setDropDownViewResource(R.layout.dropdown_item);
+        startDateSpinner.setAdapter(mStartDatesArrayAdapter);
+
+        mStartTimes.add("8:00 AM");
+        mStartTimesArrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_spinner_item, mStartTimes);
+        mStartTimesArrayAdapter.setDropDownViewResource(R.layout.dropdown_item);
+        startTimeSpinner.setAdapter(mStartTimesArrayAdapter);
+
+        mEndDates.add("October 8, 2014");
+        mEndDates.add("October 31, 2014");
+        mEndDatesArrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_spinner_item, mEndDates);
+        mEndDatesArrayAdapter.setDropDownViewResource(R.layout.dropdown_item);
+        endDateSpinner.setAdapter(mEndDatesArrayAdapter);
+
+        mEndTimes.add("10:00 PM");
+        mEndTimesArrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_spinner_item, mEndTimes);
+        mEndTimesArrayAdapter.setDropDownViewResource(R.layout.dropdown_item);
+        endTimeSpinner.setAdapter(mEndTimesArrayAdapter);
+
+        mRewards.add("Free Class");
+        mRewards.add("Free Friend Pass");
+        mRewards.add("Free T-Shirt");
+        mRewardsArrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_spinner_item, mRewards);
+        mRewardsArrayAdapter.setDropDownViewResource(R.layout.dropdown_item);
+        rewardSpinner.setAdapter(mRewardsArrayAdapter);
     }
 
     private void showAddClientsDialog(View view) {
@@ -106,7 +179,7 @@ public class ChallengeDetailsFragment extends Fragment {
         SelectClientsDialog selectClientsDialog = new SelectClientsDialog(clientList, new WireTaskCallback<ArrayList<Client>>() {
             @Override
             public void onFinished(ArrayList<Client> result) {
-
+                //TODO: saves list of clients and updates the number selected
             }
         }, new Runnable() {
             @Override
