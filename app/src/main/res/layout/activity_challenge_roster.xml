@@ -66,7 +66,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical|center_horizontal"
-            android:textSize="14dp"
+            android:textSize="16dp"
             android:textStyle="bold"
             android:text="Participating"
             android:drawablePadding="0dp"/>
@@ -82,7 +82,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical|center_horizontal"
             android:layout_weight="1"
-            android:textSize="14dp"
+            android:textSize="16dp"
             android:textStyle="bold"
             android:text="Pending"/>
 
@@ -100,7 +100,8 @@
         android:layout_height="wrap_content"
         android:text="Participants"
         android:textColor="#FFFFFF"
-        android:gravity="center"
+        android:textSize="16dp"
+        android:paddingLeft="5dp"
         android:background="@color/orange04"/>
     <View
         android:layout_width="fill_parent"
@@ -125,7 +126,7 @@
         android:layout_height="wrap_content"
         android:text="Pending"
         android:textColor="#FFFFFF"
-        android:gravity="center"
+        android:paddingLeft="5dp"
         android:background="@color/orange04"/>
     <View
         android:layout_width="fill_parent"
