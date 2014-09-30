@@ -35,7 +35,7 @@ import planetexpress.nimbus.fragments.ChallengeDetailsFragment;
 import planetexpress.nimbus.fragments.ChallengeListFragment;
 
 
-public class ChallengeSetup extends Activity implements ChallengeListFragment.OnFragmentInteractionListener {
+public class ChallengeSetup extends Activity implements ChallengeListFragment.OnFragmentInteractionListener, ChallengeDetailsFragment.OnFragmentInteractionListener {
     private static final String TAG = "ChallengeSetupActivity";
 
     @InjectView(R.id.fabbutton) protected Button fabButton;
@@ -132,5 +132,10 @@ public class ChallengeSetup extends Activity implements ChallengeListFragment.On
 
         Intent rosterIntent = new Intent(this, ChallengeRosterActivity.class);
         startActivity(rosterIntent);
+    }
+
+    @Override
+    public void onStartChallenge() {
+        selectOngoing();
     }
 }
