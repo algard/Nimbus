@@ -1,5 +1,15 @@
 apply plugin: 'com.android.library'
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+configurations {
+    patch
+}
+
 android {
     compileSdkVersion 19
     buildToolsVersion '19.1.0'
@@ -25,6 +35,53 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(dir: 'lib', include: ['*.jar'])
+    patch 'com.googlecode.jarjar:jarjar:1.3'
 }
+
+project.ext.set("shouldBuildPatch", { !new File('lib/okhttp-urlconnection-2.0.0.patched.jar').exists() })
+
+task downloadPatchLibs(type: Copy) {
+    into('lib')
+    from(configurations.patch)
+    exclude('jarjar*')
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+}
+downloadPatchLibs.doFirst {
+    if(!shouldBuildPatch()) { throw new StopExecutionException() }
+}
+
+task applyPatch(dependsOn: 'downloadPatchLibs') << {
+    if (shouldBuildPatch()) {
+        project.ant {
+            taskdef name: "jarjar", classname: "com.tonicsystems.jarjar.JarJarTask", classpath: configurations.patch.asPath
+            jarjar(jarfile: 'lib/okhttp-urlconnection-2.0.0.patched.jar', filesetmanifest: "merge") {
+                zipfileset(src: 'lib/okio-1.0.1.jar')
+                zipfileset(src: 'lib/okhttp-2.0.0.jar')
+                zipfileset(src: 'lib/okhttp-urlconnection-2.0.0.jar')
+                rule pattern: "okio.**", result: "custom.okio.@1"
+            }
+        }
+    }
+}
+
+task cleanupDownloadPatchLibs(type: Delete, dependsOn: 'applyPatch') {
+    delete 'lib/okio-1.0.1.jar'
+    delete 'lib/okhttp-2.0.0.jar'
+    delete 'lib/okhttp-urlconnection-2.0.0.jar'
+}
+
+assemble.dependsOn(cleanupDownloadPatchLibs)
+
+task cleanPatch(type: Delete) {
+    delete 'lib'
+}
+clean.dependsOn(cleanPatch)
+
+

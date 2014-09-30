@@ -22,7 +22,15 @@ import com.jawbone.upplatformsdk.oauth.OauthWebViewActivity;
 import com.jawbone.upplatformsdk.utils.UpPlatformSdkConstants;
 import com.parse.PushService;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import planetexpress.nimbus.Client;
@@ -52,6 +60,14 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
     private String mClientParseID;
     private ChallengeListFragment mFragment;
 
+    public class StepData {
+        int id;
+        int totalSteps;
+        int totalCalories;
+    }
+
+    private ArrayList<StepData> stepData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,10 +96,9 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
         accessToken = preferences.getString(UpPlatformSdkConstants.UP_PLATFORM_ACCESS_TOKEN, "");
         refreshToken = preferences.getString(UpPlatformSdkConstants.UP_PLATFORM_REFRESH_TOKEN, "");
 
-        if (accessToken.isEmpty()) {
-            //TODO list is already "hidden" b/c we haven't added the fragment yet... will hold off on that until we have the client name & jawbone data
-        } else {
-            // hrmpphh
+        if (!accessToken.isEmpty()) {
+            ApiManager.getRequestInterceptor().setAccessToken(accessToken);
+            pullStepData();
         }
     }
 
@@ -118,9 +133,7 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
                 editor.putString(UpPlatformSdkConstants.UP_PLATFORM_REFRESH_TOKEN, result.refresh_token);
                 editor.commit();
 
-                Intent intent = new Intent(ClientChallengeActivity.this, UpApiListActivity.class);
-                intent.putExtra(UpPlatformSdkConstants.CLIENT_SECRET, JAWBONE_CLIENT_SECRET);
-                startActivity(intent);
+                pullStepData();
 
                 Log.e(TAG, "accessToken:" + result.access_token);
             } else {
@@ -218,5 +231,64 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
         Intent challengeDetails = new Intent(this, ClientModeChallengeDetailsActivity.class);
         challengeDetails.putExtra(ClientModeChallengeDetailsActivity.EXTRA_CHALLENGE_ID, id);
         startActivity(challengeDetails);
+    }
+
+    private void refreshViews() {
+        
+    }
+
+    private void pullStepData(final int id, Calendar startDate, Calendar endDate) {
+        ApiManager.getRestApiInterface().getMoveEventsList(UpPlatformSdkConstants.API_VERSION_STRING, getMoveEventsListRequestParams(startDate, endDate), new Callback<Object>() {
+            @Override
+            public void success(Object o, Response response) {
+                Log.e(TAG, "api call successful, json output: " + o.toString());
+                processStepData(id, o);
+                refreshViews();
+                //Toast.makeText(getApplicationContext(), o.toString(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+                Log.e(TAG, "api call failed, error message: " + retrofitError.getMessage());
+                Toast.makeText(getApplicationContext(), retrofitError.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private static HashMap<String, Integer> getMoveEventsListRequestParams(Calendar startDate, Calendar endDate) {
+        HashMap<String, Integer> queryHashMap = new HashMap<String, Integer>();
+        SimpleDateFormat date = new SimpleDateFormat("yyyymmdd");
+
+        //uncomment to add as needed parameters
+        queryHashMap.put("date", Integer.valueOf(date.format(startDate)));
+//      queryHashMap.put("page_token", "<insert-page-token>");
+        queryHashMap.put("start_time", startDate.get(Calendar.MILLISECOND));
+        queryHashMap.put("end_time", endDate.get(Calendar.MILLISECOND));
+//      queryHashMap.put("updated_after", "<insert-time>");
+
+        return queryHashMap;
+    }
+
+    private void processStepData(int id, Object o) {
+        int totalSteps = 0;
+        int totalCalories = 0;
+
+        try {
+            JSONObject obj = new JSONObject(o.toString());
+            JSONArray items = obj.getJSONObject("data").getJSONArray("items");
+            for (int i = 0; i < items.length(); i++) {
+                totalSteps += items.getJSONObject(i).getInt("steps");
+                totalCalories += items.getJSONObject(i).getInt("calories");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        StepData steps = new StepData();
+        steps.id = id;
+        steps.totalSteps = totalSteps;
+        steps.totalCalories = totalCalories;
+
+        stepData.add(steps);
     }
 }

@@ -44,7 +44,7 @@ public class OauthWebViewActivity extends Activity {
 
         webview.setWebViewClient(new WebViewClient() {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                String accessCodeFragment = "&code=";
+                String accessCodeFragment = "code=";
                 Log.e(TAG, "oauth response from server: " + url);
 
                 int start = url.indexOf(accessCodeFragment);
