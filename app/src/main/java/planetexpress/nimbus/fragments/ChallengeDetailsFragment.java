@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.ParseException;
@@ -48,6 +49,7 @@ public class ChallengeDetailsFragment extends Fragment {
     @InjectView(R.id.endDateSpinner) protected Spinner endDateSpinner;
     @InjectView(R.id.endTimeSpinner) protected Spinner endTimeSpinner;
     @InjectView(R.id.startChallengeButton) protected Button startChallenge;
+    @InjectView(R.id.numberOfParticipants) TextView numberParticipating;
 
 
     private ArrayAdapter<String> mChallengeTypeArrayAdapter;
@@ -189,7 +191,8 @@ public class ChallengeDetailsFragment extends Fragment {
                 SelectClientsDialog selectClientsDialog = new SelectClientsDialog(clientList, new WireTaskCallback<ArrayList<Client>>() {
                     @Override
                     public void onFinished(ArrayList<Client> result) {
-
+                         int size = result.size();
+                         numberParticipating.setText(size + " Participants");
                     }
                 }, new Runnable() {
                     @Override
