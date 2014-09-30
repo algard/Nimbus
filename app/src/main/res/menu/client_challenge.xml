@@ -1,8 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="planetexpress.nimbus.activities.ClientChallengeActivity" >
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
+    <item android:id="@+id/action_jawbone"
+        android:title="Connect To Jawbone"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+    <item android:id="@+id/action_username"
+        android:title="Set Username"
         android:orderInCategory="100"
         android:showAsAction="never" />
 </menu>

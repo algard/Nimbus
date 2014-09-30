@@ -1,16 +1,20 @@
 package planetexpress.nimbus.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.jawbone.upplatformsdk.api.ApiManager;
@@ -57,14 +61,13 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
         authScope  = new ArrayList<UpPlatformSdkConstants.UpPlatformAuthScope>();
         authScope.add(UpPlatformSdkConstants.UpPlatformAuthScope.ALL);
 
-        Button oAuthAuthorizeButton = (Button) findViewById(R.id.authorizeButton);
-        oAuthAuthorizeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = getIntentForWebView();
-                startActivityForResult(intent, UpPlatformSdkConstants.JAWBONE_AUTHORIZE_REQUEST_CODE);
-            }
-        });
+        //TODO Matt - this button was hidden, moved to the actionbar, handled in OnOptionItemClicked() down below
+//        Button oAuthAuthorizeButton = (Button) findViewById(R.id.authorizeButton);
+//        oAuthAuthorizeButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//            }
+//        });
 
         //PushService.subscribe(this, "NimbusChallengeChannel", ClientChallengeActivity.class);
         PushService.subscribe(this, "ChallengeCreated", ClientChallengeActivity.class);
@@ -80,7 +83,7 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
         if (accessToken.isEmpty()) {
             //TODO: David hide list
         } else {
-            oAuthAuthorizeButton.setVisibility(View.GONE);
+            //oAuthAuthorizeButton.setVisibility(View.GONE);
         }
     }
     @Override
@@ -146,13 +149,38 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_jawbone) {
+            Intent intent = getIntentForWebView();
+            startActivityForResult(intent, UpPlatformSdkConstants.JAWBONE_AUTHORIZE_REQUEST_CODE);
+            return true;
+        }else if(id == R.id.action_username){
+            //TODO set username somehow
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Title");
+
+            // Set up the input
+            final EditText input = new EditText(this);
+            // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            builder.setView(input);
+
+            // Set up the buttons
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    mClientID = input.getText().toString();
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            builder.show();
             return true;
         }
 
