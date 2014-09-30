@@ -47,9 +47,6 @@ public class ChallengeListFragment extends ListFragment {
             mClientID = getArguments().getString(ARG_CLIENT_ID);
         }
 
-        //force it to get all challenges for now, TODO remove this line
-        mClientID = null;
-
         mUserChallenges = new ArrayList<>();
         boolean isClientMode = mClientID != null;
         mChallengeListAdapter = new ChallengeListAdapter(getActivity(), android.R.id.text1, mUserChallenges, isClientMode);

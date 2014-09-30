@@ -163,5 +163,7 @@ public class ClientChallengeActivity extends Activity implements ChallengeListFr
     public void onChallengeSelected(String id) {
         Toast.makeText(this,"Challenge Clicked: "+id, Toast.LENGTH_SHORT).show();
         Intent challengeDetails = new Intent(this, ClientModeChallengeDetailsActivity.class);
+        challengeDetails.putExtra(ClientModeChallengeDetailsActivity.EXTRA_CHALLENGE_ID, id);
+        startActivity(challengeDetails);
     }
 }

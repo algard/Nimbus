@@ -3,6 +3,7 @@ package planetexpress.nimbus.activities;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.Outline;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
@@ -59,6 +61,7 @@ public class ChallengeSetup extends Activity implements ChallengeListFragment.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_setup);
+        getActionBar().setHomeButtonEnabled(true);
         ButterKnife.inject(this);
         ParseAnalytics.trackAppOpened(getIntent());
         ongoingTab.setActivated(true);
@@ -80,8 +83,6 @@ public class ChallengeSetup extends Activity implements ChallengeListFragment.On
 
         //start with ongoing tab loaded
         selectOngoing();
-
-        getChallenges();
     }
 
     private void onAddButtonPressed() {
@@ -94,28 +95,11 @@ public class ChallengeSetup extends Activity implements ChallengeListFragment.On
 
     private void loadChallengeList(){
         fabButton.setVisibility(View.VISIBLE);
-        Fragment listFragment = new ChallengeListFragment();
+        Fragment listFragment = ChallengeListFragment.newInstance(null);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, listFragment);
         transaction.commit();
     }
-
-    public void getChallenges(){
-        MindbodyRepository repository = new MindbodyRepository(this);
-        repository.getAllChallenges(new MindbodyRepository.ChallengeDataListener() {
-            @Override
-            public void onData(ArrayList<Challenge> result) {
-                // do something with result
-            }
-
-            @Override
-            public void onError() {
-
-            }
-        });
-
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -142,5 +126,9 @@ public class ChallengeSetup extends Activity implements ChallengeListFragment.On
     @Override
     public void onChallengeSelected(String id) {
         //TODO intent to ChallengeDetailsFragment ... etc
+        Toast.makeText(this, "Challenge Clicked: " + id, Toast.LENGTH_SHORT).show();
+
+        Intent rosterIntent = new Intent(this, ChallengeRosterActivity.class);
+        startActivity(rosterIntent);
     }
 }
